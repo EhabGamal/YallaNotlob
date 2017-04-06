@@ -1,0 +1,24 @@
+<!-- Login form -->
+<div class="row">
+  <form action="#" method="post" #loginForm="ngForm">
+    <h4 class="center red-text">Login</h4>
+    <div class="input-field col s12 m6 l4 offset-m3 offset-l4">
+      <input name="username" id="username" type="text" required>
+      <label for="username">Username</label>
+    </div>
+    <div class="input-field col s12 m6 l4 offset-m3 offset-l4">
+      <input name="password" id="password" type="password" required>
+      <label for="password">Password</label>
+    </div>
+    <div class="input-field col s12 m6 l4 offset-m3 offset-l4">
+      <input name="remember" type="checkbox" class="filled-in" id="filled-in-box" />
+      <label for="filled-in-box">Remember me</label>
+    </div>
+    <div class="input-field col s12 m6 l4 offset-m3 offset-l4 center">
+      <input name="submit" id="submit" type="submit" value="login" class="btn blue" [disabled]="loginForm.form.valid">
+    </div>
+    <div class="input-field col s12 m6 l4 offset-m3 offset-l4 center">
+      <p>Don't have Account? <a href="#" id="signup">Signup</a></p>
+    </div>
+  </form>
+</div>
