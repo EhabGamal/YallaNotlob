@@ -18,7 +18,33 @@
       <input name="submit" id="submit" type="submit" value="login" class="btn blue" [disabled]="!loginForm.form.valid">
     </div>
     <div class="input-field col s12 m6 l4 offset-m3 offset-l4 center">
+      <p class="red-text center-align">{{msg}}</p>
       <p>Don't have Account? <a [routerLink]="['/signup']" id="signup">Signup</a></p>
     </div>
   </form>
+</div>
+
+<div class="col s12 center" id="loading-spinner" *ngIf="loading">
+  <div class="preloader-wrapper big active">
+    <div class="spinner-layer spinner-blue">
+     <div class="circle-clipper left"><div class="circle"></div></div>
+     <div class="gap-patch"><div class="circle"></div></div>
+     <div class="circle-clipper right"><div class="circle"></div></div>
+    </div>
+    <div class="spinner-layer spinner-red">
+      <div class="circle-clipper left"><div class="circle"></div></div>
+      <div class="gap-patch"><div class="circle"></div></div>
+      <div class="circle-clipper right"><div class="circle"></div></div>
+    </div>
+    <div class="spinner-layer spinner-yellow">
+      <div class="circle-clipper left"><div class="circle"></div></div>
+      <div class="gap-patch"><div class="circle"></div></div>
+      <div class="circle-clipper right"><div class="circle"></div></div>
+    </div>
+    <div class="spinner-layer spinner-green">
+      <div class="circle-clipper left"><div class="circle"></div></div>
+      <div class="gap-patch"><div class="circle"></div></div>
+      <div class="circle-clipper right"><div class="circle"></div></div>
+    </div>
+  </div>
 </div>
