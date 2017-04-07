@@ -1,25 +1,25 @@
 <!-- SignUp form -->
 <div class="row">
-  <form action="#" method="post">
+  <form action="#" method="post" materialize #signupForm="ngForm" (ngSubmit)="onSubmit(signupForm)">
     <h4 class="center red-text">Register</h4>
     <div class="input-field col s12 m4 offset-m4">
-      <input name="fname" id="fname" type="text" class="validate" required>
+      <input name="fname" id="fname" type="text" class="validate" [(ngModel)]="user.firstName" required>
       <label for="fname">First Name</label>
     </div>
     <div class="input-field col s12 m4 offset-m4">
-      <input name="lname" id="lname" type="text" class="validate" required>
+      <input name="lname" id="lname" type="text" class="validate" [(ngModel)]="user.lastName" required>
       <label for="lname">Last Name</label>
     </div>
     <div class="input-field col s12  m4 offset-m4">
-      <input name="email" id="email" type="email" class="validate" required>
+      <input name="email" id="email" type="email" class="validate" [(ngModel)]="user.email" required>
       <label for="email">Email</label>
     </div>
     <div class="input-field col s12 m4 offset-m4">
-      <input name="password" id="password" type="password" class="validate" required>
+      <input name="password" id="password" type="password" class="validate" [(ngModel)]="user.password" required>
       <label for="password">Password</label>
     </div>
     <div class="input-field col s12 m4 offset-m4">
-      <input name="rpassword" id="rpassword" type="password" class="validate" required>
+      <input name="rpassword" id="rpassword" type="password" class="validate" [(ngModel)]="user.rpassword" required>
       <label for="rpassword">Re-password</label>
     </div>
     <div class="col s12 m4 offset-m4">
@@ -32,7 +32,32 @@
       <input name="submit" id="submit" type="submit" value="register" class="btn blue">
     </div>
     <div class="input-field col s12 m6 offset-m3">
+      <p class="red-text center-align">{{msg}}</p>
       <p class="center-align">Already have Account? <a [routerLink]="['/login']">Login</a></p>
     </div>
   </form>
+</div>
+<div class="col s12 center" id="loading-spinner" *ngIf="loading">
+  <div class="preloader-wrapper big active">
+    <div class="spinner-layer spinner-blue">
+      <div class="circle-clipper left"><div class="circle"></div></div>
+      <div class="gap-patch"><div class="circle"></div></div>
+      <div class="circle-clipper right"><div class="circle"></div></div>
+    </div>
+    <div class="spinner-layer spinner-red">
+      <div class="circle-clipper left"><div class="circle"></div></div>
+      <div class="gap-patch"><div class="circle"></div></div>
+      <div class="circle-clipper right"><div class="circle"></div></div>
+    </div>
+    <div class="spinner-layer spinner-yellow">
+      <div class="circle-clipper left"><div class="circle"></div></div>
+      <div class="gap-patch"><div class="circle"></div></div>
+      <div class="circle-clipper right"><div class="circle"></div></div>
+    </div>
+    <div class="spinner-layer spinner-green">
+      <div class="circle-clipper left"><div class="circle"></div></div>
+      <div class="gap-patch"><div class="circle"></div></div>
+      <div class="circle-clipper right"><div class="circle"></div></div>
+    </div>
+  </div>
 </div>
