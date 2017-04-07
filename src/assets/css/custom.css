@@ -1,0 +1,26 @@
+#loading-spinner{
+  position: absolute;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  z-index: 10;
+  background-color: rgba(255,255,255,0.75);
+}
+#loading-spinner .preloader-wrapper{
+  position: relative;
+  top: 45%;
+}
+.btn-inline{
+  position: absolute !important;
+  right: 10px;
+  top: 20px;
+}
+.btn-rb{
+  position: absolute !important;
+  right: 5px;
+  bottom: 5px;
+}
+.slim .card-content{
+  padding: 10px !important;
+}
