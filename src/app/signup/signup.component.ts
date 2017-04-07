@@ -8,7 +8,7 @@ import { AppService } from "../services/app.service";
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css'],
-  providers: [ SignupService, AppService ]
+  providers: [ SignupService ]
 })
 export class SignupComponent implements OnInit {
 
@@ -37,6 +37,7 @@ export class SignupComponent implements OnInit {
           localStorage.setItem('token', data.token);
           this.appService.setLoggedin(true);
           this.appService.user = data.user;
+          this.appService.token = data.token;
           this.router.navigate(['/']);
           this.loading = false;
         },
