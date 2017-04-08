@@ -5,7 +5,7 @@ import 'rxjs/Rx';
 
 @Injectable()
 export class SignupService {
-/*
+
   constructor(@Inject(APP_CONFIG) private config: AppConfig, private http: Http) {
     console.log(config.apiEndpoint);
   }
@@ -15,6 +15,6 @@ export class SignupService {
     const headers = new Headers({ 'Content-Type': 'application/json'});
     return this.http.post(this.config.apiEndpoint+'register', body, {headers: headers})
       .map((response: Response) => response.json());
-  }*/
+  }
 
 }

@@ -1,0 +1,15 @@
+#center{
+text-align: center;
+
+}
+
+.main{
+
+    margin-left: 20px;
+    width: 50%;
+    padding: 10px;
+    border:1px solid ;
+    border-color: grey;
+
+
+}

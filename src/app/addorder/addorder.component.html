@@ -1,6 +1,6 @@
 <!--<app-header></app-header>-->
 <app-navbar></app-navbar>
-
+<!--
 <nav class="ban">
   <div class="nav-wrapper">
     <ul id="nav-mobile" class="left hide-on-med-and-down">
@@ -8,11 +8,14 @@
     </ul>
   </div>
 </nav>
-
+-->
+<h3 id="center"> orders </h3>
 <br>
 
-<div class="form">
+<div class="left">
 <form action="#" method ="">
+
+<!--
 <div class="input-field col s12" id="limit">
    <select>
      <option value="" disabled selected>Order For</option>
@@ -20,7 +23,15 @@
      <option value="2">Lunch</option>
      <option value="3">Dinner</option>
    </select>
- </div>
+ </div>-->
+ <div class="row">
+          <div class="input-field col s6">
+                <select [ngModel]="initialValue" (ngModelChange)="change($event)" id="selectExample" materialize="material_select" [materializeSelectOptions]="options">
+                  <option value="" disabled selected>Select option ..</option>
+                  <option *ngFor="let option of options" [value]="option.value">{{option.name}}</option>
+              </select>
+          </div>
+      </div>
    <br><br><br>
 
  <div class="row">
@@ -57,9 +68,25 @@
   <i class="material-icons right">send</i>
 </button>
 </div>
-
-
  </form>
+</div>
 
 
+<div class="right">
+  <div class="card ">
+  <div class="col s12 m6">
+    <h3 class="header">Friends Invited</h3>
+      <div class="card-image">
+        <img src="../assets/images/person0.png">
+      </div>
+      <div class="card-stacked">
+        <div class="card-content">
+          <p>ahmed ali</p>
+        </div>
+        <div class="card-action">
+          <a href="#">Remove</a>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
