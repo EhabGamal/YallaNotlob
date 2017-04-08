@@ -5,6 +5,8 @@ import {HomeComponent} from "./home/home.component";
 import {FriendsComponent} from "./friends/friends.component";
 import {GroupsComponent} from "./groups/groups.component";
 import {OrdersComponent} from "./orders/orders.component";
+import {AddorderComponent} from "./addorder/addorder.component";
+import {VieworderComponent} from "./vieworder/vieworder.component";
 
 const APP_ROUTES: Routes = [
   { path: '', component: HomeComponent },
@@ -12,6 +14,9 @@ const APP_ROUTES: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'friends', component: FriendsComponent },
   { path: 'groups', component: GroupsComponent },
+  { path: 'orders', component: OrdersComponent },
+  { path: 'vieworder', component: VieworderComponent },
+  { path: 'addorder', component: AddorderComponent },
 ];
 
 export const routing = RouterModule.forRoot(APP_ROUTES);
