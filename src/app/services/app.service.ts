@@ -6,7 +6,8 @@ export class AppService {
   constructor() { }
 
   private loggedin = false;
-  public user = {};
+  public user: any = {};
+  public token: string = '';
 
   checkStatus(): boolean {
     return this.loggedin;

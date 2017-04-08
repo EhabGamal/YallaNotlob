@@ -1,14 +1,11 @@
-/**
- * Created by ehab on 4/7/17.
- */
 import { OpaqueToken } from "@angular/core";
 
 export let APP_CONFIG = new OpaqueToken("app.config");
 
-export interface IAppConfig {
+export interface AppConfig {
   apiEndpoint: string;
 }
-
-export const AppConfig: IAppConfig = {
+export const AppConfig: AppConfig = {
+//export const AppConfig = {
   apiEndpoint: "https://yalabenanotlob.herokuapp.com/"
 };

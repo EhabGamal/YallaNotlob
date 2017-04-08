@@ -12,11 +12,12 @@ import { OrdersComponent } from './orders/orders.component';
 import { AddorderComponent } from './addorder/addorder.component';
 import { VieworderComponent } from './vieworder/vieworder.component';
 import { HeaderComponent } from './header.component';
-import { NavbarComponent } from './navbar/navbar.component';
+import { NavbarComponent } from './parts/navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { SignupComponent } from './signup/signup.component';
 import { GroupsComponent } from './groups/groups.component';
 import { FriendsComponent } from './friends/friends.component';
+import { LoadingComponent } from './parts/loading.component';
 
 
 @NgModule({
@@ -32,7 +33,7 @@ import { FriendsComponent } from './friends/friends.component';
     SignupComponent,
     GroupsComponent,
     FriendsComponent,
-
+    LoadingComponent,
   ],
   imports: [
     BrowserModule,
