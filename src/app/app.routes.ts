@@ -11,7 +11,8 @@ import {VieworderComponent} from "./vieworder/vieworder.component";
 import {AuthGuard} from "./services/auth.guard";
 
 const APP_ROUTES: Routes = [
-  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: '', pathMatch: 'full', redirectTo: '/home' },
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'friends', component: FriendsComponent, canActivate: [AuthGuard] },
