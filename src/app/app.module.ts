@@ -20,6 +20,7 @@ import { FriendsComponent } from './friends/friends.component';
 import { LoadingComponent } from './parts/loading.component';
 import { AuthGuard } from "./services/auth.guard";
 import { LoginService } from "./services/login.service";
+import { ModalComponent } from './parts/modal.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { LoginService } from "./services/login.service";
     GroupsComponent,
     FriendsComponent,
     LoadingComponent,
+    ModalComponent,
   ],
   imports: [
     BrowserModule,

@@ -49,13 +49,3 @@
   </div>
 </div>
 <app-loading *ngIf="loading"></app-loading>
-<!-- Modal Structure -->
-<div id="modal1" class="modal" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalActions">
-  <div class="modal-content center">
-    <i class="material-icons green-text" style="font-size: 150px">check</i>
-    <b><h5>Group Added Successfully</h5></b>
-  </div>
-  <div class="modal-footer">
-    <a class="waves-effect waves-green btn-flat" (click)="closeModal()">Close</a>
-  </div>
-</div>
