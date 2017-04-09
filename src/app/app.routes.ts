@@ -8,15 +8,17 @@ import {OrdersComponent} from "./orders/orders.component";
 import {AddorderComponent} from "./addorder/addorder.component";
 import {VieworderComponent} from "./vieworder/vieworder.component";
 
+import {AuthGuard} from "./services/auth.guard";
+
 const APP_ROUTES: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
-  { path: 'friends', component: FriendsComponent },
-  { path: 'groups', component: GroupsComponent },
-  { path: 'orders', component: OrdersComponent },
-  { path: 'vieworder', component: VieworderComponent },
-  { path: 'addorder', component: AddorderComponent },
+  { path: 'friends', component: FriendsComponent, canActivate: [AuthGuard] },
+  { path: 'groups', component: GroupsComponent, canActivate: [AuthGuard] },
+  { path: 'orders', component: OrdersComponent, canActivate: [AuthGuard] },
+  { path: 'vieworder', component: VieworderComponent, canActivate: [AuthGuard] },
+  { path: 'addorder', component: AddorderComponent, canActivate: [AuthGuard] },
 ];
 
 export const routing = RouterModule.forRoot(APP_ROUTES);

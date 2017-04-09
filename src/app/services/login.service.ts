@@ -10,6 +10,12 @@ export class LoginService {
     console.log(config.apiEndpoint);
   }
 
+  isLoggedIn(){
+    if(localStorage.getItem('token'))
+      return true;
+    return false;
+  }
+
   authLogin(user: any){
     const body = JSON.stringify(user);
     const headers = new Headers({ 'Content-Type': 'application/json'});
