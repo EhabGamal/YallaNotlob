@@ -1,0 +1,25 @@
+.ban{
+      margin: center;
+      align-content: right;
+}
+
+#limit{
+  width:500px;
+}
+
+.right{
+   margin-right: 100px;
+   width: 350px;
+   height: 450px;
+
+}
+
+.left{
+  margin-left: 50px;
+  width: 600px;
+  height: 400px;
+}
+
+#center{
+  text-align: center;
+}

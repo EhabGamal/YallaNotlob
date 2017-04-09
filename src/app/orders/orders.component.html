@@ -1,3 +1,62 @@
-<p>
-  orders works!
-</p>
+<!--<app-header></app-header>-->
+<app-navbar></app-navbar>
+
+<nav class="ban">
+  <div class="nav-wrapper">
+    <ul id="nav-mobile" class="left hide-on-med-and-down">
+      <li>Orders</li>
+    </ul>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li><a [routerLink]="['/addorder']" >Start New Order</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="main" >
+      <table>
+        <thead>
+          <tr>
+              <th>Order</th>
+              <th>Resturants</th>
+              <th>Invited</th>
+              <th>Joined</th>
+              <th>Status</th>
+              <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Breakfast</td>
+            <td>Mac</td>
+            <td>4</td>
+            <td>2</td>
+            <td>waiting</td>
+            <td>
+              <a class="waves-effect waves-teal btn-flat" [routerLink]="['/vieworder']" >View</a>
+               <a class="waves-effect waves-teal btn-flat">Finish</a>
+                <a class="waves-effect waves-teal btn-flat">Cancel</a>
+            </td>
+          </tr>
+          <tr>
+            <td>Lunch</td>
+            <td>Hardees</td>
+            <td>5</td>
+            <td>3</td>
+            <td>finished</td>
+            <td>
+              <a class="waves-effect waves-teal btn-flat" [routerLink]="['/vieworder']">View</a>
+               <a class="waves-effect waves-teal btn-flat">Finish</a>
+                <a class="waves-effect waves-teal btn-flat">Cancel</a>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+</div>
+<div class="pag">
+  <ul class="pagination">
+    <li class="disabled"><a href="#"><i class="material-icons">chevron_left</i></a></li>
+    <li class="active"><a href="#">1</a></li>
+    <li class="waves-effect"><a href="#"><i class="material-icons">chevron_right</i></a></li>
+  </ul>
+</div>
