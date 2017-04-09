@@ -15,9 +15,9 @@ export class FriendsService {
       .map((response: Response) => response.json());
   }
   addFriend(email: string){
-    //const body = JSON.stringify({user:email});
+    const body = JSON.stringify({email:email});
     const headers = new Headers({ 'Content-Type': 'application/json','Authorization': this.appService.token});
-    return this.http.post(this.config.apiEndpoint+'users/'+email+'/friend',{},{headers: headers})
+    return this.http.post(this.config.apiEndpoint+'users/add_friend',body,{headers: headers})
       .map((response: Response) => response.json());
   }
   unFriend(id: string){
