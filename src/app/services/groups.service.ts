@@ -7,7 +7,7 @@ import 'rxjs/Rx';
 @Injectable()
 export class GroupsService {
 
-  constructor(@Inject(APP_CONFIG) private config: AppConfig, private http: Http, private appService: AppService) { }
+constructor(@Inject(APP_CONFIG) private config: AppConfig, private http: Http, private appService: AppService) { }
 
   getAll(id: string){
     const headers = new Headers({ 'Authorization': this.appService.token});
