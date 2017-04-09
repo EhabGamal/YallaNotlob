@@ -21,6 +21,7 @@ import { LoadingComponent } from './parts/loading.component';
 import { AuthGuard } from "./services/auth.guard";
 import { LoginService } from "./services/login.service";
 import { ModalComponent } from './parts/modal.component';
+import { NotFoundComponent } from './parts/notfound.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { ModalComponent } from './parts/modal.component';
     FriendsComponent,
     LoadingComponent,
     ModalComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
