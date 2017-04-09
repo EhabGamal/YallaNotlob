@@ -2,23 +2,24 @@
 <div class="col s12">
   <div class="row">
     <div class="input-field col s12 m6 l4 offset-m3 offset-l4">
-      <input name="friend" id="friend" type="email" class="validate" required>
+      <input name="friend" id="friend" type="email" class="validate" [(ngModel)]="friendEmail" required>
       <label for="friend">Friend Email</label>
-      <button class="btn-floating waves-effect waves-light btn-inline red"><i class="material-icons">person_add</i></button>
+      <button class="btn-floating waves-effect waves-light btn-inline red" (click)="addFriend()"><i class="material-icons">person_add</i></button>
     </div>
   </div>
   <div class="row">
-    <div class="col s6 m3">
+    <div class="col s6 m3" *ngFor="let friend of friends">
       <div class="card horizontal slim">
         <div class="card-image">
           <img src="assets/images/person0.png">
         </div>
         <div class="card-stacked">
           <div class="card-content">
-            <h5>Username</h5>
+            <h6>{{friend.firstName}} {{friend.lastName}}</h6>
+            <p>{{friend.email}}</p>
           </div>
         </div>
-        <button class="btn-floating waves-effect waves-light btn-rb red"><i class="material-icons">close</i></button>
+        <button class="btn-floating waves-effect waves-light btn-rb red" (click)="unFriend(friend._id)"><i class="material-icons">close</i></button>
       </div>
     </div>
     <div class="col s6 m3">
@@ -31,98 +32,7 @@
             <h5>Username</h5>
           </div>
         </div>
-        <button class="btn-floating waves-effect waves-light btn-rb red"><i class="material-icons">close</i></button>
-      </div>
-    </div>
-    <div class="col s6 m3">
-      <div class="card horizontal slim">
-        <div class="card-image">
-          <img src="assets/images/person0.png">
-        </div>
-        <div class="card-stacked">
-          <div class="card-content">
-            <h5>Username</h5>
-          </div>
-        </div>
-        <button class="btn-floating waves-effect waves-light btn-rb red"><i class="material-icons">close</i></button>
-      </div>
-    </div>
-    <div class="col s6 m3">
-      <div class="card horizontal slim">
-        <div class="card-image">
-          <img src="assets/images/person0.png">
-        </div>
-        <div class="card-stacked">
-          <div class="card-content">
-            <h5>Username</h5>
-          </div>
-        </div>
-        <button class="btn-floating waves-effect waves-light btn-rb red"><i class="material-icons">close</i></button>
-      </div>
-    </div>
-    <div class="col s6 m3">
-      <div class="card horizontal slim">
-        <div class="card-image">
-          <img src="assets/images/person0.png">
-        </div>
-        <div class="card-stacked">
-          <div class="card-content">
-            <h5>Username</h5>
-          </div>
-        </div>
-        <button class="btn-floating waves-effect waves-light btn-rb red"><i class="material-icons">close</i></button>
-      </div>
-    </div>
-    <div class="col s6 m3">
-      <div class="card horizontal slim">
-        <div class="card-image">
-          <img src="assets/images/person0.png">
-        </div>
-        <div class="card-stacked">
-          <div class="card-content">
-            <h5>Username</h5>
-          </div>
-        </div>
-        <button class="btn-floating waves-effect waves-light btn-rb red"><i class="material-icons">close</i></button>
-      </div>
-    </div>
-    <div class="col s6 m3">
-      <div class="card horizontal slim">
-        <div class="card-image">
-          <img src="assets/images/person0.png">
-        </div>
-        <div class="card-stacked">
-          <div class="card-content">
-            <h5>Username</h5>
-          </div>
-        </div>
-        <button class="btn-floating waves-effect waves-light btn-rb red"><i class="material-icons">close</i></button>
-      </div>
-    </div>
-    <div class="col s6 m3">
-      <div class="card horizontal slim">
-        <div class="card-image">
-          <img src="assets/images/person0.png">
-        </div>
-        <div class="card-stacked">
-          <div class="card-content">
-            <h5>Username</h5>
-          </div>
-        </div>
-        <button class="btn-floating waves-effect waves-light btn-rb red"><i class="material-icons">close</i></button>
-      </div>
-    </div>
-    <div class="col s6 m3">
-      <div class="card horizontal slim">
-        <div class="card-image">
-          <img src="assets/images/person0.png">
-        </div>
-        <div class="card-stacked">
-          <div class="card-content">
-            <h5>Username</h5>
-          </div>
-        </div>
-        <button class="btn-floating waves-effect waves-light btn-rb red"><i class="material-icons">close</i></button>
+        <a class="btn-floating waves-effect waves-light btn-rb red"><i class="material-icons">close</i></a>
       </div>
     </div>
   </div>
