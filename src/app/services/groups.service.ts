@@ -7,28 +7,34 @@ import 'rxjs/Rx';
 @Injectable()
 export class GroupsService {
 
-  constructor(@Inject(APP_CONFIG) private config: AppConfig, private http: Http, private appService: AppService) {
-    console.log(config.apiEndpoint);
-  }
+  constructor(@Inject(APP_CONFIG) private config: AppConfig, private http: Http, private appService: AppService) { }
 
   getAll(id: string){
     const headers = new Headers({ 'Authorization': this.appService.token});
-    console.log(this.appService.token);
     return this.http.get(this.config.apiEndpoint+'users/'+id+'/groups',{headers: headers})
       .map((response: Response) => response.json());
   }
   addGroup(name: string){
     const body = JSON.stringify({name:name});
     const headers = new Headers({ 'Content-Type': 'application/json','Authorization': this.appService.token});
-    console.log(this.appService.token);
     return this.http.post(this.config.apiEndpoint+'groups',body,{headers: headers})
       .map((response: Response) => response.json());
   }
-  addMember(gid: string ,uid: string){
-    const body = JSON.stringify({user:uid});
+  removeGroup(id: string){
     const headers = new Headers({ 'Content-Type': 'application/json','Authorization': this.appService.token});
-    console.log(this.appService.token);
-    return this.http.post(this.config.apiEndpoint+'groups/gid/add_member',body,{headers: headers})
+    return this.http.delete(this.config.apiEndpoint+'groups/'+id,{headers: headers})
+      .map((response: Response) => response.json());
+  }
+  addMember(gid: string ,email: string){
+    const body = JSON.stringify({email:email});
+    const headers = new Headers({ 'Content-Type': 'application/json','Authorization': this.appService.token});
+    return this.http.post(this.config.apiEndpoint+'groups/'+gid+'/add_email',body,{headers: headers})
+      .map((response: Response) => response.json());
+  }
+  removeMember(gid: string ,id: string){
+    const body = JSON.stringify({user:id});
+    const headers = new Headers({ 'Content-Type': 'application/json','Authorization': this.appService.token});
+    return this.http.post(this.config.apiEndpoint+'groups/'+gid+'/remove_member',body,{headers: headers})
       .map((response: Response) => response.json());
   }
 }

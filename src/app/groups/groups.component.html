@@ -4,32 +4,32 @@
     <div class="input-field col s12 m6 l4 offset-m3 offset-l4">
       <input name="group" id="group" type="text" [(ngModel)]="groupName" required>
       <label for="group">Group Name</label>
-      <button class="btn-floating waves-effect waves-light btn-inline red" (click)="addGroup()"><i class="material-icons">group_add</i></button>
+      <button class="btn-floating waves-effect waves-light btn-inline red tooltipped" materialize="tooltip" data-tooltip="Add Group" (click)="addGroup()"><i class="material-icons">group_add</i></button>
     </div>
   </div>
   <div class="row">
     <div class="col s12 m4">
       <ul class="collection with-header">
         <li class="collection-header"><h5>Your Groups</h5></li>
-        <a *ngFor="let group of groups.owned" (click)="viewGroupMembers(group.members)" class="collection-item">{{group.name}}<a class="secondary-content" (click)="removeGroup(group._id)" ><i class="material-icons red-text">delete_forever</i></a></a>
+        <a *ngFor="let group of groups.owned" (click)="viewGroup(group)" class="collection-item">{{group.name}}<a class="secondary-content tooltipped" materialize="tooltip" data-tooltip="Remove Group" (click)="removeGroup(group._id)" ><i class="material-icons red-text">delete_forever</i></a></a>
       </ul>
       <ul class="collection with-header">
         <li class="collection-header"><h5>Other Groups</h5></li>
-        <a *ngFor="let group of groups.joined" (click)="viewGroupMembers(group.members)" class="collection-item">{{group.name}}<a class="secondary-content" (click)="removeGroup(group._id)" ><i class="material-icons red-text">delete_forever</i></a></a>
+        <a *ngFor="let group of groups.joined" (click)="viewGroup(group)" class="collection-item">{{group.name}}<a class="secondary-content tooltipped" materialize="tooltip" data-tooltip="Remove Group" (click)="removeGroup(group._id)" ><i class="material-icons red-text">delete_forever</i></a></a>
       </ul>
     </div>
     <div class="col s12 m8 card">
       <div class="col s6">
-        <h4>Group name</h4>
+        <h4>{{currentGroup.name}}</h4>
       </div>
       <div class="input-field col s16 m6">
-        <input name="friend" id="friend" type="email" class="validate" required>
+        <input name="friend" id="friend" type="email" class="validate" [(ngModel)]="memberEmail" required>
         <label for="friend">Friend Email</label>
-        <button class="btn-floating waves-effect waves-light btn-inline red modal-trigger" (click)="openModal()" ><i class="material-icons">add</i></button>
+        <button class="btn-floating waves-effect waves-light btn-inline red modal-trigger tooltipped" materialize="tooltip" data-tooltip="Add Friend to this Group" (click)="addMember()" ><i class="material-icons">add</i></button>
       </div>
       <div class="col s12">
         <div class="row">
-          <div class="col s6 m4" *ngFor="let member of members">
+          <div class="col s6 m4" *ngFor="let member of currentGroup.members">
             <div class="slim horizontal card">
               <div class="card-image">
                 <img src="assets/images/person0.png">
@@ -40,7 +40,7 @@
                   <span>{{member.email}}</span>
                 </div>
               </div>
-              <button class="btn-floating waves-effect waves-light btn-rb red"><i class="material-icons">close</i></button>
+              <button class="btn-floating waves-effect waves-light btn-rb red tooltipped" materialize="tooltip" data-tooltip="Remove Friend from this Group" (click)="removeMember(member._id)"><i class="material-icons">close</i></button>
             </div>
           </div>
         </div>
