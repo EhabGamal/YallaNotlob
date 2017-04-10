@@ -10,11 +10,21 @@ import { MaterializeAction } from 'angular2-materialize';
   providers: [ OrdersService ]
 })
 export class OrdersComponent implements OnInit {
-
-  constructor(private appService: AppService, private groupsService: OrdersService) { }
+   public orders: any = {};
+ 
+  constructor(private appService: AppService, private ordersService: OrdersService) { }
 
   ngOnInit() {
-    
+    this.getOrders();
   }
 
+  getOrders(){
+     this.ordersService.getOrders(this.appService.user._id).subscribe(
+       (data: any) => { this.orders = data; console.log(this.orders); },
+      (error: any) => { },
+      () => { }
+    );
+     console.log("orders",this.orders)
+  }
+  
 }
