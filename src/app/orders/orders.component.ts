@@ -31,11 +31,25 @@ export class OrdersComponent implements OnInit {
     var target = event.target ;
     var idAttr = target.attributes.id;
     var order_id = idAttr.nodeValue;
+    console.log(order_id)
     this.ordersService.finishOrder(order_id).subscribe(
     (data: any) => { this.getOrders(); console.log(this.orders); },
       (error: any) => { },
       () => { }
      );
+     console.log(order_id)
+   }
+
+   cancelOrder(event:any){
+    var target = event.target ;
+    var idAttr = target.attributes.id;
+    var order_id = idAttr.nodeValue;
+    this.ordersService.cancelOrder(order_id).subscribe(
+    (data: any) => { this.getOrders(); console.log(this.orders); },
+      (error: any) => { },
+      () => { }
+     );
+     console.log(order_id)
    }    
   
 }
