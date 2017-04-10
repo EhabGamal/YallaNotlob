@@ -33,3 +33,6 @@
   min-width: 30% !important;
   max-width: 30% !important;
 }
+.collection .collection-item.avatar{
+  min-height: auto !important;
+}
