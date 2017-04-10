@@ -26,5 +26,16 @@ export class OrdersComponent implements OnInit {
     );
      console.log("orders",this.orders)
   }
+
+   finishOrder(event:any){
+    var target = event.target ;
+    var idAttr = target.attributes.id;
+    var order_id = idAttr.nodeValue;
+    this.ordersService.finishOrder(order_id).subscribe(
+    (data: any) => { this.getOrders(); console.log(this.orders); },
+      (error: any) => { },
+      () => { }
+     );
+   }    
   
 }
