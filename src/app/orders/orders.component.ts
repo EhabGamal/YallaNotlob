@@ -50,6 +50,24 @@ export class OrdersComponent implements OnInit {
       () => { }
      );
      console.log(order_id)
-   }    
-  
+   } 
+
+  view(event: any) {
+
+    var target = event.target;
+    var idAttr = target.attributes.id;
+    var order_id = idAttr.nodeValue;
+
+    var order = { id: "", for: "", resturant: "", invited: "", joined: "", status: "", meal: [{ id: "", comment: "", amount: "", price: "", item: "", person: "" }], invitedgroups: [], invitedfriends: [] }
+    for (var i = 0; i < this.orders.length; i++) {
+
+      if (this.orders[i].id == order_id) {
+        order = this.orders[i];
+      }
+    }
+   
+     let orderData= { "order": JSON.stringify(order)};
+    
+    }   
+         
 }
