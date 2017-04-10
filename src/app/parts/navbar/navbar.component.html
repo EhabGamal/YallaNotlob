@@ -6,13 +6,13 @@
 </ul>
 <nav class="red darken-1" role="navigation">
   <div class="nav-wrapper container">
-    <a id="logo-container" href="#" class="brand-logo"><i class="material-icons">verified_user</i>Yalla Notlob</a>
+    <a id="logo-container" [routerLink]="['/home']" class="brand-logo"><i class="material-icons">verified_user</i>Yalla Notlob</a>
     <ul class="right hide-on-small-and-down">
-      <li class=" waves-effect waves-light"><a [routerLink]="['/']" materialize="tooltip" class="tooltipped" data-tooltip="Profile"><i class="material-icons">account_circle</i></a></li>
+      <li class=" waves-effect waves-light"><a [routerLink]="['/home']" materialize="tooltip" class="tooltipped" data-tooltip="Profile"><i class="material-icons">account_circle</i></a></li>
       <li class=" waves-effect waves-light"><a [routerLink]="['/groups']" materialize="tooltip" class="tooltipped" data-tooltip="Groups"><i class="material-icons">group</i></a></li>
       <li class=" waves-effect waves-light"><a [routerLink]="['/friends']" materialize="tooltip" class="tooltipped" data-tooltip="Friends"><i class="material-icons">group_add</i></a></li>
       <li class=" waves-effect waves-light"><a [routerLink]="['/orders']" materialize="tooltip" class="tooltipped" data-tooltip="Orders"><i class="material-icons">shopping_cart</i></a></li>
-      <li class=" waves-effect waves-light"><a [routerLink]="['/']" materialize="tooltip" class="tooltipped" data-tooltip="Home"><i class="material-icons">home</i></a></li>
+      <li class=" waves-effect waves-light"><a [routerLink]="['/home']" materialize="tooltip" class="tooltipped" data-tooltip="Home"><i class="material-icons">home</i></a></li>
       <li class=" waves-effect waves-light"><a [routerLink]="['/login']" materialize="tooltip" class="tooltipped" data-tooltip="Logout"><i class="material-icons">input</i></a></li>
       <li><a class="dropdown-button" href="#!" data-activates="dropdown1" materialize="dropdown" [materializeParams]="[{belowOrigin: true}]"><span class="" data-badge-caption="">0</span></a></li>
     </ul>
@@ -20,17 +20,20 @@
       <li>
         <div class="userView">
           <div class="background">
-            <img src="" class="responsive-img">
+            <img src="assets/images/material.png" class="responsive-img">
           </div>
-          <a href="#!user"><img class="circle" src=""></a>
-          <a href="#!name"><span class="white-text name">Username</span></a>
-          <a href="#!email"><span class="white-text email">Example@email.com</span></a>
+          <a href="#!user"><img class="circle" src="assets/images/person2.png"></a>
+          <a href="#!name"><span class="white-text name">{{user.firstName}} {{user.lastName}}</span></a>
+          <a href="#!email"><span class="white-text email">{{user.email}}</span></a>
         </div>
       </li>
-      <li><a href="#!" class="waves-effect"><i class="material-icons red-text">home</i>Home</a></li>
-      <li><a href="#!" class="waves-effect"><i class="material-icons red-text">account_circle</i>Account</a></li>
-      <li><a href="#!" class="waves-effect"><i class="material-icons red-text">settings</i>Settings</a></li>
-      <li><a href="#!" class="waves-effect"><i class="material-icons red-text">input</i>Logout</a></li>
+      <li><a [routerLink]="['/home']" class="waves-effect"><i class="material-icons red-text">home</i>Home</a></li>
+      <li><a [routerLink]="['/home']" class="waves-effect"><i class="material-icons red-text">account_circle</i>Account</a></li>
+      <li><a [routerLink]="['/groups']" class="waves-effect"><i class="material-icons red-text">group</i>Groups</a></li>
+      <li><a [routerLink]="['/friends']" class="waves-effect"><i class="material-icons red-text">group_add</i>Friends</a></li>
+      <li><a [routerLink]="['/orders']" class="waves-effect"><i class="material-icons red-text">shopping_cart</i>Orders</a></li>
+      <li><div class="divider"></div></li>
+      <li><a [routerLink]="['/login']" class="waves-effect"><i class="material-icons red-text">input</i>Logout</a></li>
     </ul>
     <a href="#" materialize="sideNav" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
   </div>

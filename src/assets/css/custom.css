@@ -21,6 +21,15 @@
   right: 5px;
   bottom: 5px;
 }
+.btn-rt{
+  position: absolute !important;
+  right: 5px;
+  top: 5px;
+}
 .slim .card-content{
   padding: 10px !important;
+}
+.card.horizontal .card-image{
+  min-width: 30% !important;
+  max-width: 30% !important;
 }

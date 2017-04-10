@@ -18,7 +18,10 @@ import { SignupComponent } from './signup/signup.component';
 import { GroupsComponent } from './groups/groups.component';
 import { FriendsComponent } from './friends/friends.component';
 import { LoadingComponent } from './parts/loading.component';
-
+import { AuthGuard } from "./services/auth.guard";
+import { LoginService } from "./services/login.service";
+import { ModalComponent } from './parts/modal.component';
+import { NotFoundComponent } from './parts/notfound.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +37,8 @@ import { LoadingComponent } from './parts/loading.component';
     GroupsComponent,
     FriendsComponent,
     LoadingComponent,
+    ModalComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,7 +49,8 @@ import { LoadingComponent } from './parts/loading.component';
     MaterializeModule
   ],
   providers: [
-    { provide: APP_CONFIG, useValue: AppConfig }
+    { provide: APP_CONFIG, useValue: AppConfig },
+    LoginService, AuthGuard
   ],
   bootstrap: [AppComponent]
 })

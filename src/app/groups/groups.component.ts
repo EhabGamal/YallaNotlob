@@ -1,7 +1,6 @@
-import { Component, EventEmitter, OnInit} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { GroupsService } from '../services/groups.service'
 import { AppService } from '../services/app.service'
-import { MaterializeAction } from 'angular2-materialize';
 
 @Component({
   selector: 'app-groups',
@@ -10,14 +9,6 @@ import { MaterializeAction } from 'angular2-materialize';
   providers: [ GroupsService ]
 })
 export class GroupsComponent implements OnInit {
-
-  modalActions = new EventEmitter<string|MaterializeAction>();
-  openModal() {
-    this.modalActions.emit({action:"modal",params:['open']});
-  }
-  closeModal() {
-    this.modalActions.emit({action:"modal",params:['close']});
-  }
 
   loading: boolean = true;
   groupName: string = '';
