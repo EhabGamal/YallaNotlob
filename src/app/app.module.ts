@@ -1,10 +1,10 @@
+//import { MaterialModule } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { routing } from './app.routes';
 import { APP_CONFIG, AppConfig } from './app.config';
-//import { MaterialModule } from '@angular/material';
 import { MaterializeModule } from 'angular2-materialize';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -22,6 +22,7 @@ import { AuthGuard } from "./services/auth.guard";
 import { LoginService } from "./services/login.service";
 import { ModalComponent } from './parts/modal.component';
 import { NotFoundComponent } from './parts/notfound.component';
+import { SearchPipe } from './services/search.pipe'
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { NotFoundComponent } from './parts/notfound.component';
     LoadingComponent,
     ModalComponent,
     NotFoundComponent,
+    SearchPipe
   ],
   imports: [
     BrowserModule,
