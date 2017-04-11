@@ -23,9 +23,8 @@ export class OrdersService {
   }
 
    finishOrder(id: string){
-    const body = JSON.stringify({id});
     const headers = new Headers({ 'Content-Type': 'application/json','Authorization': this.appService.token});
-    return this.http.post(this.config.apiEndpoint+'orders'+id,{headers: headers})
+    return this.http.post(this.config.apiEndpoint+'orders/'+id+'/checkout',{},{headers: headers})
       .map((response: Response) => response.json());
   }
 
