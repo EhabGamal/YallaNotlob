@@ -7,7 +7,7 @@ export class AppService {
 
   private loggedin = false;
   public user: any = JSON.parse(localStorage.getItem('user'));
-  public token: string = '';
+  public token: string = localStorage.getItem('token');
 
   checkStatus(): boolean {
     return this.loggedin;
