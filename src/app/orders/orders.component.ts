@@ -10,7 +10,7 @@ import { MaterializeAction } from 'angular2-materialize';
   providers: [ OrdersService ]
 })
 export class OrdersComponent implements OnInit {
-   public orders: any = {};
+   public orders: any = [];
  
   constructor(private appService: AppService, private ordersService: OrdersService) { }
 
@@ -20,10 +20,11 @@ export class OrdersComponent implements OnInit {
 
   getOrders(){
      this.ordersService.getOrders(this.appService.user._id).subscribe(
-       (data: any) => { this.orders = data; console.log("orders are :",this.orders); },
+       (data: any) => { this.orders = data; console.log("orders are :",this.orders); console.log("first order :" , this.orders[0].for) },
       (error: any) => { },
       () => { }
     );
+    
   }
 
 //    finishOrder(event:any){

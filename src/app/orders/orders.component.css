@@ -11,3 +11,18 @@
 .ban{
       margin: center;
 }
+
+#ri{
+  float: right;
+  margin-right: 200px;
+  margin-top: 50px;
+  
+
+}
+
+#le{
+   float: left;
+   margin-left: 150px;
+  margin-top: 50px;
+
+}
