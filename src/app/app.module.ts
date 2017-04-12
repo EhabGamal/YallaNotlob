@@ -22,7 +22,8 @@ import { AuthGuard } from "./services/auth.guard";
 import { LoginService } from "./services/login.service";
 import { ModalComponent } from './parts/modal.component';
 import { NotFoundComponent } from './parts/notfound.component';
-import { SearchPipe } from './services/search.pipe'
+import { SearchPipe } from './services/search.pipe';
+import { UploaderComponent } from './parts/uploader.component'
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { SearchPipe } from './services/search.pipe'
     LoadingComponent,
     ModalComponent,
     NotFoundComponent,
-    SearchPipe
+    SearchPipe,
+    UploaderComponent
   ],
   imports: [
     BrowserModule,
