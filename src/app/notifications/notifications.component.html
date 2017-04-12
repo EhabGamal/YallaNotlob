@@ -1,3 +1,7 @@
 <p>
   notifications works!
 </p>
+<div *ngFor="let notification of notifications">
+  {{notification.message}}
+</div>
+<input [(ngModel)]="notification.message"/><button (click)="sendNotification()">Send</button>
