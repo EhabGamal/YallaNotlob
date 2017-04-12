@@ -1,6 +1,25 @@
 <app-navbar></app-navbar>
 <div class="row">
-  <div class="col s12 m6">
+  <div class="col s12 m2">
+    <div class="card profile-card">
+      <div class="card-image">
+        <img src="assets/images/person0.png">
+        <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+      </div>
+      <div class="card-content">
+        <span class="card-title">Ehab Gamal</span>
+        <p>ehab.g.sh@gmail.com</p>
+      </div>
+      <div class="collection">
+        <a [routerLink]="['/addorder']" class="collection-item">New Order<a class="secondary-content"><i class="material-icons">add_shopping_cart</i></a></a>
+        <a [routerLink]="['/friends']" class="collection-item active">Friends<a href="#!" class="secondary-content"><i class="material-icons">group_add</i></a></a>
+        <a [routerLink]="['/groups']" class="collection-item">Groups<a href="#!" class="secondary-content"><i class="material-icons">group</i></a></a>
+        <a href="#!" class="collection-item">About<a href="#!" class="secondary-content"><i class="material-icons">info</i></a></a>
+        <a href="#!" class="collection-item">About<a href="#!" class="secondary-content"><i class="material-icons">info</i></a></a>
+      </div>
+    </div>
+  </div>
+  <div class="col s12 m5">
     <div class="card">
       <div class="card-content">
         <span class="card-title">Latest Orders</span>
@@ -13,7 +32,7 @@
       </div>
     </div>
   </div>
-  <div class="col s12 m6">
+  <div class="col s12 m5">
     <div class="card">
       <div class="card-content">
         <span class="card-title">Friends Activity</span>
@@ -28,7 +47,7 @@
             <i class="material-icons circle">folder</i>
             <span class="title">Title</span>
             <p>First Line</p>
-            <a [routerLink]="['/addorder']" class="secondary-content"><i class="material-icons">announcement</i></a>
+            <a class="secondary-content"><i class="material-icons">announcement</i></a>
           </li>
           <li class="collection-item avatar">
             <i class="material-icons circle green">insert_chart</i>
