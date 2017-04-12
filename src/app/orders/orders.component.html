@@ -1,16 +1,21 @@
 <!--<app-header></app-header>-->
 <app-navbar></app-navbar>
 
-<nav class="ban">
+<!--<nav class="ban">
   <div class="nav-wrapper">
     <ul id="nav-mobile" class="left hide-on-med-and-down">
       <li>Orders</li>
     </ul>
     <ul id="nav-mobile" class="right hide-on-med-and-down">
-      <li><a [routerLink]="['/addorder']" >Start New Order</a></li>
-    </ul>
+      <!--<li><a [routerLink]="['/addorder']" >Start New Order</a></li>
+       <li><a class="waves-effect waves-light btn-large" [routerLink]="['/addorder']">Start New Order</a></li>
   </div>
-</nav>
+</nav>-->
+
+<div>
+   <h3 id="le"> Orders </h3>
+   <a id="ri" class="waves-effect btn-large red darken-1" [routerLink]="['/addorder']">Start New Order</a>
+</div>
 
 <div class="main" >
       <table>
@@ -21,20 +26,21 @@
               <th>Invited</th>
               <th>Joined</th>
               <th>Status</th>
+              
               <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let order of orders">
-            <td>{{order.forr}}</td>
-            <td>{{order.resturant}}</td>
-            <td>{{order.invited}}</td>
-            <td>{{order.joined}}</td>
-            <td>{{order.status}}</td>
+            <td>{{order.for}}</td>
+            <td>TEST</td>
+            <td>TEST</td>
+            <td>TEST</td>
+            <td>TEST</td>
             <td>
-              <a class="waves-effect waves-teal btn-flat" [routerLink]="['/vieworder']" >View</a>
-               <a class="waves-effect waves-teal btn-flat" id={{order.id}} (click)="finishOrder($event)" type="submit">Finish</a>
-                <a class="waves-effect waves-teal btn-flat" id={{order.id}} (click)="cancelOrder($event)" type="submit">Cancel</a>
+              <a class="waves-effect waves-teal btn-flat pink lighten-4" [routerLink]="['/vieworder']" >View</a>
+               <a class="waves-effect waves-teal btn-flat pink lighten-4" id={{order.id}} (click)="finishOrder($event)" type="submit">Finish</a>
+                <a class="waves-effect waves-teal btn-flat pink lighten-4" id={{order.id}} (click)="cancelOrder($event)" type="submit">Cancel</a>
             </td>
           </tr>
         </tbody>
