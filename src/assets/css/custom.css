@@ -1,3 +1,19 @@
+html, body{
+  height: 100% !important;
+}
+.no-margin{
+  margin:0 !important;
+}
+.no-padding{
+  padding:0 !important;
+}
+.fit-height{
+  height: 100% !important;
+}
+.group-list{
+  height: 375px !important;
+  overflow-y: auto !important;
+}
 #loading-spinner{
   position: absolute;
   top:0;
@@ -35,4 +51,8 @@
 }
 .collection .collection-item.avatar{
   min-height: auto !important;
+}
+.profile-card .collection{
+  border:0;
+  border-top:1px solid #e0e0e0;
 }
