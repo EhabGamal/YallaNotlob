@@ -4,7 +4,7 @@
     <div class="card profile-card">
       <div class="card-image">
         <img src="assets/images/person0.png">
-        <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+        <a class="btn-floating halfway-fab waves-effect waves-light red" (click)="editProfile()"><i class="material-icons">edit</i></a>
       </div>
       <div class="card-content">
         <span class="card-title">Ehab Gamal</span>
@@ -66,4 +66,35 @@
     </div>
   </div>
 </div>
+<div id="editUserModal" class="modal" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="profileModalActions">
+  <div class="modal-content center">
+    <h4>Edit Your Info</h4>
+    <div class="row">
+      <div class="col s4">
+        <img src="{{newProfile.image}}" alt="" class="circle responsive-img">
+      </div>
+      <div class="input-field col s8">
+        <input name="fname" id="fname" type="text" [(ngModel)]="newProfile.firstName" required>
+        <label for="fname">First Name</label>
+      </div>
+      <div class="input-field col s8">
+        <input name="lname" id="lname" type="text" [(ngModel)]="newProfile.lastName" required>
+        <label for="lname">Last Name</label>
+      </div>
+      <div class="input-field col s8">
+        <input name="email" id="email" type="email" class="validate" [(ngModel)]="newProfile.email" required>
+        <label for="email">Email</label>
+      </div>
+      <div class="col s8">
+        <app-uploader [tag]="'avatar'" [accept]="'image/x-png,image/gif,image/jpeg'" (upload)="uploaded($event)"></app-uploader>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <span class="red-text left" style="font-size:20px;">{{newProfile.error}}</span>
+      <a class="btn waves-effect" (click)="saveProfile()">Save</a>
+      <a class="btn waves-effect red" (click)="closeProfileModal()">Cancel</a>
+    </div>
+  </div>
+</div>
+<app-loading *ngIf="loading"></app-loading>
 <app-modal #modal [data]='modalMsg' ></app-modal>
