@@ -23,7 +23,8 @@ import { LoginService } from "./services/login.service";
 import { ModalComponent } from './parts/modal.component';
 import { NotFoundComponent } from './parts/notfound.component';
 import { SearchPipe } from './services/search.pipe';
-import { UploaderComponent } from './parts/uploader.component'
+import { UploaderComponent } from './parts/uploader.component';
+import { NotificationsComponent } from './notifications/notifications.component'
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { UploaderComponent } from './parts/uploader.component'
     ModalComponent,
     NotFoundComponent,
     SearchPipe,
-    UploaderComponent
+    UploaderComponent,
+    NotificationsComponent
   ],
   imports: [
     BrowserModule,
