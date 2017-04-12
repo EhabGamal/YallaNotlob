@@ -14,8 +14,12 @@ constructor(@Inject(APP_CONFIG) private config: AppConfig, private http: Http, p
     return this.http.get(this.config.apiEndpoint+'users/'+id+'/groups',{headers: headers})
       .map((response: Response) => response.json());
   }
-  addGroup(name: string){
-    const body = JSON.stringify({name:name});
+  addGroup(group: any){
+    let body: any = {name: group.name, icon:''};
+    if(group.upload)
+      body.icon = group.icon;
+    console.log(body);
+    body = JSON.stringify(body);
     const headers = new Headers({ 'Content-Type': 'application/json','Authorization': this.appService.token});
     return this.http.post(this.config.apiEndpoint+'groups',body,{headers: headers})
       .map((response: Response) => response.json());
@@ -23,6 +27,11 @@ constructor(@Inject(APP_CONFIG) private config: AppConfig, private http: Http, p
   removeGroup(id: string){
     const headers = new Headers({ 'Content-Type': 'application/json','Authorization': this.appService.token});
     return this.http.delete(this.config.apiEndpoint+'groups/'+id,{headers: headers})
+      .map((response: Response) => response.json());
+  }
+  leaveGroup(id: string){
+    const headers = new Headers({ 'Content-Type': 'application/json','Authorization': this.appService.token});
+    return this.http.post(this.config.apiEndpoint+'groups/'+id+'/leave',{},{headers: headers})
       .map((response: Response) => response.json());
   }
   addMember(gid: string ,email: string){
