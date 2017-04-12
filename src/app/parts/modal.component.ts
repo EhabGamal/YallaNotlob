@@ -6,7 +6,7 @@ import { MaterializeAction } from 'angular2-materialize';
   template: `
     <div id="modal1" class="modal" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalActions">
       <div class="modal-content center">
-        <i class="material-icons green-text" [ngClass]="iconClass()" style="font-size: 180px">{{data.icon}}</i>
+        <i class="material-icons {{data.color}}" style="font-size: 180px">{{data.icon}}</i>
         <h4>{{data.msg}}</h4>
       </div>
       <div class="modal-footer">
@@ -32,14 +32,6 @@ export class ModalComponent implements OnInit {
 
   closeModal() {
     this.modalActions.emit({action:"modal",params:['close']});
-  }
-
-  iconClass(){
-    return {
-      'green-text': this.data.success,
-      'orange-text': this.data.warning,
-      'red-text': this.data.danger
-    }
   }
 
 }
