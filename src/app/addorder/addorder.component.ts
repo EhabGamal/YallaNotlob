@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { GroupsService } from '../services/groups.service'
-import { FriendsService } from '../services/friends.service'
 import { ProvidersService } from '../services/providers.service'
 import { AppService } from '../services/app.service'
 
@@ -8,17 +7,16 @@ import { AppService } from '../services/app.service'
   selector: 'app-addorder',
   templateUrl: './addorder.component.html',
   styleUrls: ['./addorder.component.css'],
-  providers: [ GroupsService, FriendsService, ProvidersService ]
+  providers: [ GroupsService, ProvidersService ]
 })
-export class AddorderComponent implements OnInit {
 
+export class AddorderComponent implements OnInit {
   public myGroups: any = {};
-  public myFriends: any = [];
   public invitedGroups: any = {owned:[],joined:[]};
-  public invitedFriends: any = [];
   public providers: any = [];
   public providerValue: any;
   private loading: boolean = false;
+
   public mealsOptions: any = [
     { name:'Breakfast', value:'breakfast'},
     { name:'Lunch', value:'lunch'},
@@ -26,13 +24,10 @@ export class AddorderComponent implements OnInit {
   ];
   public mealValue: any;
 
-  public email: string = '';
-
-  constructor(private appService: AppService, private groupsService: GroupsService, private friendsService: FriendsService, private providersService: ProvidersService) { }
+  constructor(private appService: AppService, private groupsService: GroupsService, private providersService: ProvidersService) { }
 
   ngOnInit() {
     this.loadMyGroups();
-    this.loadMyFriends();
     this.loadProviders();
   }
 
@@ -49,16 +44,7 @@ export class AddorderComponent implements OnInit {
     this.groupsService.getAll(this.appService.user._id).subscribe(
       (data: any) => { this.myGroups = data; console.log(this.myGroups.owned); },
       (error: any) => { this.loading = false; },
-      () => { this.loading = false; console.log('loading groups completed'); }
-    );
-  }
-
-  loadMyFriends(){
-    this.loading = true;
-    this.friendsService.getAll(this.appService.user._id).subscribe(
-      (data: any) => { this.myFriends = data; console.log(this.myFriends); },
-      (error: any) => { this.loading = false; },
-      () => { this.loading = false; console.log('loading friends completed'); }
+      () => { this.loading = false; }
     );
   }
 
@@ -81,26 +67,13 @@ export class AddorderComponent implements OnInit {
     this.invitedGroups[type].splice(this.invitedGroups[type].indexOf(group),1);
   }
 
-  inviteFriend(friend: any){
-    this.invitedFriends.push(friend);
-    this.myFriends.splice(this.myFriends.indexOf(friend),1);
-  }
-
-  removeFriend(friend: any){
-    this.myFriends.push(friend);
-    this.invitedFriends.splice(this.invitedFriends.indexOf(friend),1);
-  }
-
   publishOrder(){
     let members: any = [];
     for(let type in this.invitedGroups){
       this.invitedGroups[type].forEach((group) => {
-        group.members.forEach((friend) => { if(members.indexOf(friend.email)==-1) members.push(friend.email); })
+        group.members.forEach((friend) => { members.push(friend.email); })
       });
     }
-    this.invitedFriends.forEach((friend) => {
-      if(members.indexOf(friend.email)==-1) members.push(friend.email);
-    });
     console.log(members);
   }
 
