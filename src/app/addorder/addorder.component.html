@@ -1,9 +1,8 @@
 <!--<app-header></app-header>-->
 <app-navbar></app-navbar>
-<div class="col s12">
+<div class="row" style="height: 500px">
   <h5 class="center-align">Create New Order</h5>
-  <div class="row card">
-    <div class="col s12 m4">
+    <div class="col s12 m4 card fit-height">
       <div class="input-field col s12">
         <h5>Order For</h5>
         <select materialize="material_select" [materializeSelectOptions]="mealsOptions" [ngModel]="mealValue" (ngModelChange)="changeMeal($event)">
@@ -22,7 +21,7 @@
         <a class="btn red" (click)="publishOrder()">Publish</a>
       </div>
     </div>
-    <div class="col s12 m4">
+    <div class="col s12 m4 card fit-height">
       <h5>Invite Groups</h5>
       <ul class="collection">
         <li *ngFor="let group of myGroups.owned" class="collection-item avatar">
@@ -51,7 +50,7 @@
         </li>
       </ul>
     </div>
-    <div class="col s12 m4">
+    <div class="col s12 m4 card fit-height">
       <h5>Invited Groups</h5>
       <ul class="collection">
         <li *ngFor="let group of invitedGroups.owned" class="collection-item avatar">
@@ -74,5 +73,4 @@
         </li>
       </ul>
     </div>
-  </div>
 </div>
