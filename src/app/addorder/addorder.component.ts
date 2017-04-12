@@ -12,21 +12,21 @@ import { AppService } from '../services/app.service'
 })
 export class AddorderComponent implements OnInit {
 
-  public myGroups: any = {};
-  public myFriends: any = [];
-  public invitedGroups: any = {owned:[],joined:[]};
-  public invitedFriends: any = [];
-  public providers: any = [];
-  public providerValue: any;
+  private myGroups: any = {};
+  private myFriends: any = [];
+  private invitedGroups: any = {owned:[],joined:[]};
+  private invitedFriends: any = [];
+  private providers: any = [];
+  private providerValue: any;
   private loading: boolean = false;
-  public mealsOptions: any = [
+  private mealsOptions: any = [
     { name:'Breakfast', value:'breakfast'},
     { name:'Lunch', value:'lunch'},
     { name:'Dinner', value:'dinner'}
   ];
-  public mealValue: any;
+  private mealValue: any;
 
-  public email: string = '';
+  private email: string = '';
 
   constructor(private appService: AppService, private groupsService: GroupsService, private friendsService: FriendsService, private providersService: ProvidersService) { }
 
@@ -82,12 +82,15 @@ export class AddorderComponent implements OnInit {
   }
 
   inviteFriend(friend: any){
-    this.invitedFriends.push(friend);
-    this.myFriends.splice(this.myFriends.indexOf(friend),1);
+    if(this.invitedFriends.indexOf(friend) == -1){
+      this.invitedFriends.push(friend);
+      this.myFriends.splice(this.myFriends.indexOf(friend),1);
+    }
   }
 
   removeFriend(friend: any){
-    this.myFriends.push(friend);
+    if(this.myFriends.indexOf(friend) == -1)
+      this.myFriends.push(friend);
     this.invitedFriends.splice(this.invitedFriends.indexOf(friend),1);
   }
 
