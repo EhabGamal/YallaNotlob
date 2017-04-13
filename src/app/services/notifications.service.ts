@@ -21,18 +21,22 @@ export class NotificationsService {
   }
 
   sendNotification(notification){
-    this.socket.emit('new notification',notification);
+    this.socket.emit('new notification', notification);
+  }
+  seeNotification(notificationId){
+    this.socket.emit('see notification', notificationId);
   }
 
   getNotifications() {
     let observable = new Observable(observer => {
-      this.socket = io(this.config.apiEndpoint);
-      this.socket.on('message', (data) => {
+      // this.socket = io(this.config.apiEndpoint);
+      this.socket.on('refresh notifications', (data) => {
         observer.next(data);
+        console.log(data);
       });
-      return () => {
-        this.socket.disconnect();
-      };
+      // return () => {
+      //   this.socket.disconnect();
+      // };
     });
     return observable;
   }

@@ -1,34 +1,41 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { NotificationsService } from '../services/notifications.service';
+import { SocketService } from '../services/socket.service';
+import {NotificationsService} from '../services/notifications.service';
 
 @Component({
   selector: 'app-notifications',
   templateUrl: './notifications.component.html',
   styleUrls: ['./notifications.component.css'],
-  providers: [ NotificationsService ]
+  providers: [ SocketService ]
 })
 export class NotificationsComponent implements OnInit, OnDestroy {
 
-  private notifications: any = [{message:''}];
+  private notifications: any = [{message: ''}];
   private connection;
-  private notification: any = {message:''};
+  private notification: any = {to: '58e81de8639dbf5998125e64', link: 'salama.com', message: 'salama added you to the order'};
 
-  constructor( private notificationService: NotificationsService ) { }
+  constructor( private socketService: SocketService ) { }
 
   ngOnInit(): void {
-    this.notificationService.login();
-    this.connection = this.notificationService.getNotifications().subscribe( notification => {
-      this.notifications.push(notification);
-      console.log('new notification');
-    });
+    this.connection = this.socketService.get().subscribe((data) => {
+      console.log(data);
+    },
+      (err) => {
+        console.log(err);
+      }
+    );
+    // this.connection = this.notificationService.getNotifications().subscribe( notification => {
+    //   this.notifications.push(notification);
+    //   console.log('new notification');
+    // });
   }
 
   ngOnDestroy(): void {
     this.connection.unsubscribe();
   }
 
-  sendNotification(){
-    this.notificationService.sendNotification(this.notification);
+  sendNotification() {
+    this.socketService.notify(this.notification);
     this.notification = '';
   }
 
