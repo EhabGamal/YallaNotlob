@@ -7,5 +7,5 @@ export interface AppConfig {
 }
 export const AppConfig: AppConfig = {
 //export const AppConfig = {
-  apiEndpoint: "https://yalabenanotlob.herokuapp.com/"
+  apiEndpoint: "https://yalabenanotlob.herokuapp.com/api/"
 };
