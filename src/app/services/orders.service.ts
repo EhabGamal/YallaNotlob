@@ -29,9 +29,9 @@ export class OrdersService {
   }
 
  cancelOrder(id: string){
-    const body = JSON.stringify({id});
+    const body = JSON.stringify({id});  
     const headers = new Headers({ 'Content-Type': 'application/json','Authorization': this.appService.token});
-    return this.http.put(this.config.apiEndpoint+'orders/'+id,{headers: headers})
+    return this.http.put(this.config.apiEndpoint+'orders/'+id +'/cancel',{headers: headers})
       .map((response: Response) => response.json());
   }
 

@@ -34,8 +34,8 @@
           <tr *ngFor="let order of orders">
             <td>{{order.for}}</td>
             <td>TEST</td>
-            <td>TEST</td>
-            <td>TEST</td>
+            <td>{{order.invited.length}}</td>
+            <td>{{order.joined.length}}</td>
             <td>TEST</td>
             <td>
               <a class="waves-effect waves-teal btn-flat pink lighten-4" [routerLink]="['/vieworder']" >View</a>
