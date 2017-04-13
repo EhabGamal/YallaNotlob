@@ -10,9 +10,11 @@
           <div class="collapsible-header"><i class="material-icons">group</i>Owned Groups</div>
           <div class="collapsible-body no-padding">
             <ul class="collection group-list" *ngIf="groups.owned.length > 0">
-              <a *ngFor="let group of groups.owned" (click)="viewGroup(['owned',groups.owned.indexOf(group)], true)" class="collection-item waves-effect">{{group.name}}
-                <a class="secondary-content tooltipped" materialize="tooltip" data-tooltip="Remove Group" (click)="removeGroup(group._id)" >
-                  <i class="material-icons red-text">delete_forever</i>
+              <a class="collection-item avatar waves-effect" *ngFor="let group of groups.owned" (click)="viewGroup(['owned',groups.owned.indexOf(group)], true)">
+                <img src="assets/images/person0.png" alt="" class="circle">
+                <span class="full-title">{{group.name}}</span>
+                <a href="#!" class="secondary-content tooltipped" materialize="tooltip" data-tooltip="Remove Group" (click)="removeGroup(group._id)">
+                  <i class="material-icons red-text">delete</i>
                 </a>
               </a>
             </ul>
@@ -29,12 +31,14 @@
           <div class="collapsible-header"><i class="material-icons">group_add</i>Joined Groups</div>
           <div class="collapsible-body no-padding">
             <ul class="collection group-list" *ngIf="groups.joined.length > 0">
-              <a *ngFor="let group of groups.joined" (click)="viewGroup(['joined',groups.joined.indexOf(group)], false)" class="collection-item waves-effect">{{group.name}}
+              <a class="collection-item avatar waves-effect" *ngFor="let group of groups.joined" (click)="viewGroup(['owned',groups.owned.indexOf(group)], true)">
+                <img src="assets/images/person0.png" alt="" class="circle">
+                <span class="full-title">{{group.name}}</span>
                 <a class="secondary-content tooltipped" materialize="tooltip" data-tooltip="Leave Group" (click)="leaveGroup(group._id)" *ngIf="group.owner!=appService.user._id">
                   <i class="material-icons red-text">exit_to_app</i>
                 </a>
                 <a class="secondary-content tooltipped" materialize="tooltip" data-tooltip="Remove Group" (click)="removeGroup(group._id)" *ngIf="group.owner==appService.user._id">
-                  <i class="material-icons red-text">delete_forever</i>
+                  <i class="material-icons red-text">delete</i>
                 </a>
               </a>
             </ul>

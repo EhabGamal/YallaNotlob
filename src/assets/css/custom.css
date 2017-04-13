@@ -14,6 +14,24 @@ html, body{
   height: 375px !important;
   overflow-y: auto !important;
 }
+.group-list .collection-item.avatar .full-title{
+  font-size: 18px;
+  line-height: 40px;
+}
+.group-list .collection-item.avatar .secondary-content{
+  top: 15px !important;
+  right: 15px !important;
+}
+.group-list .collection-item.avatar .circle{
+  left: 5px !important;
+}
+.group-list .collection-item{
+  padding: 5px 60px !important;
+  /*padding-bottom: 6px !important;*/
+}
+.collection .collection-item.avatar{
+  min-height: 54px !important;
+}
 #loading-spinner{
   position: absolute;
   top:0;
@@ -48,9 +66,6 @@ html, body{
 .card.horizontal .card-image{
   min-width: 30% !important;
   max-width: 30% !important;
-}
-.collection .collection-item.avatar{
-  min-height: auto !important;
 }
 .profile-card .collection{
   border:0;
