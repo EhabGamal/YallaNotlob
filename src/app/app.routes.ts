@@ -7,6 +7,7 @@ import {GroupsComponent} from "./groups/groups.component";
 import {OrdersComponent} from "./orders/orders.component";
 import {AddorderComponent} from "./addorder/addorder.component";
 import {VieworderComponent} from "./vieworder/vieworder.component";
+import {NotificationsComponent} from "./notifications/notifications.component";
 import {NotFoundComponent} from "./parts/notfound.component";
 
 import {AuthGuard} from "./services/auth.guard";
@@ -21,6 +22,7 @@ const APP_ROUTES: Routes = [
   { path: 'orders', component: OrdersComponent, canActivate: [AuthGuard] },
   { path: 'vieworder', component: VieworderComponent, canActivate: [AuthGuard] },
   { path: 'addorder', component: AddorderComponent, canActivate: [AuthGuard] },
+  { path: 'notifications', component: NotificationsComponent, canActivate: [AuthGuard] },
   { path: '**', component: NotFoundComponent }
 ];
 

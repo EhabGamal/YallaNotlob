@@ -24,7 +24,8 @@ import { ModalComponent } from './parts/modal.component';
 import { NotFoundComponent } from './parts/notfound.component';
 import { SearchPipe } from './services/search.pipe';
 import { UploaderComponent } from './parts/uploader.component';
-import { NotificationsComponent } from './notifications/notifications.component'
+import { NotificationsComponent } from './notifications/notifications.component';
+import { ProvidersComponent } from './providers/providers.component'
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { NotificationsComponent } from './notifications/notifications.component'
     NotFoundComponent,
     SearchPipe,
     UploaderComponent,
-    NotificationsComponent
+    NotificationsComponent,
+    ProvidersComponent
   ],
   imports: [
     BrowserModule,
