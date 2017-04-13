@@ -1,8 +1,21 @@
-<ul id="dropdown1" class="dropdown-content">
-  <li><a href="#!">one</a></li>
-  <li><a href="#!">two</a></li>
-  <li class="divider"></li>
-  <li><a href="#!">three</a></li>
+<ul id="dropdown1" class="dropdown-content collection">
+  <li class="collection-item avatar">
+    <i class="material-icons circle">group</i>
+    <span class="title">Ehab invited you to his order</span>
+  </li>
+  <li class="collection-item avatar">
+    <i class="material-icons circle">group</i>
+    <span class="title">Ehab invited you to his order</span>
+  </li>
+  <li class="collection-item avatar">
+    <i class="material-icons circle">group</i>
+    <span class="title">Ehab invited you to his order</span>
+  </li>
+  <li class="collection-item avatar">
+    <i class="material-icons circle">group</i>
+    <span class="title">Ehab invited you to his order</span>
+  </li>
+  <li class="collection-item">View All Notifications</li>
 </ul>
 <nav class="red darken-1" role="navigation">
   <div class="nav-wrapper container">
@@ -14,7 +27,7 @@
       <li class=" waves-effect waves-light"><a [routerLink]="['/friends']" materialize="tooltip" class="tooltipped" data-tooltip="Friends"><i class="material-icons">group_add</i></a></li>
       <li class=" waves-effect waves-light"><a [routerLink]="['/orders']" materialize="tooltip" class="tooltipped" data-tooltip="Orders"><i class="material-icons">shopping_cart</i></a></li>
       <li class=" waves-effect waves-light"><a [routerLink]="['/login']" materialize="tooltip" class="tooltipped" data-tooltip="Logout"><i class="material-icons">input</i></a></li>
-      <li><a class="dropdown-button" href="#!" data-activates="dropdown1" materialize="dropdown" [materializeParams]="[{belowOrigin: true}]"><span class="" data-badge-caption="">0</span></a></li>
+      <li><a class="dropdown-button" data-activates="dropdown1" data-constrainwidth="false" materialize="dropdown" [materializeParams]="[{belowOrigin: true}]"><span class="" data-badge-caption=""><i class="material-icons">notifications</i></span></a></li>
     </ul>
     <ul id="nav-mobile" class="side-nav">
       <li>
