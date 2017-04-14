@@ -18,7 +18,6 @@ export class OrdersComponent implements OnInit {
   constructor(private appService: AppService, private ordersService: OrdersService, private friendsService: FriendsService) { }
 
   ngOnInit() {
-    this.getOrders();
     this.getFriends();
   }
 
@@ -31,7 +30,7 @@ export class OrdersComponent implements OnInit {
 
   getFriends(){
     this.friendsService.getAll(this.appService.user._id).subscribe(
-      (data) => { this.friends = data; console.log(this.friends); },
+      (data) => { this.friends = data; console.log(this.friends); this.getOrders(); },
       (error) => {console.log(error);}
     )
   }
@@ -39,33 +38,6 @@ export class OrdersComponent implements OnInit {
   getFriendName(id){
     return this.friends.filter((friend) => {
       return friend._id == id;
-    })
+    }).map((friend) => friend.firstName)
   }
-
-  finishOrder(event:any){
-    var target = event.target ;
-    var idAttr = target.attributes.id;
-    var order_id = idAttr.nodeValue;
-    console.log(order_id)
-    this.ordersService.finishOrder(order_id).subscribe(
-      (data: any) => { this.getOrders(); console.log(this.orders); },
-      (error: any) => { },
-      () => { }
-    );
-    console.log(order_id)
-  }
-
-  cancelOrder(event:any){
-    var target = event.target ;
-    var idAttr = target.attributes.id;
-    var order_id = idAttr.nodeValue;
-    this.ordersService.cancelOrder(order_id).subscribe(
-      (data: any) => { this.getOrders(); console.log(this.orders); },
-      (error: any) => { },
-      () => { }
-    );
-    console.log(order_id)
-  }
-
-
 }

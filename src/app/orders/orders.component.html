@@ -44,7 +44,7 @@
             <a class="waves-effect red-text" [routerLink]="['/vieworder/',order._id]"><i class="material-icons">info</i></a>
           </td>
         </tr>
-        <tr *ngFor="let order of orders.invited">
+        <tr *ngFor="let order of orders.joined">
           <td>{{order.name}}</td>
           <td>{{order.for}}</td>
           <td>{{getFriendName(order.owner)}}</td>
