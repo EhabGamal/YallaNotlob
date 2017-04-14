@@ -15,10 +15,22 @@ export class OrdersService {
       .map((response: Response) => response.json());
   }
 
+  getOrder(id: string){
+    const headers = new Headers({ 'Authorization': this.appService.token});
+    return this.http.get(this.config.apiEndpoint+'orders/'+id,{headers: headers})
+      .map((response: Response) => response.json());
+  }
+
   addOrder(order: any){
     const body = JSON.stringify(order);
     const headers = new Headers({ 'Content-Type': 'application/json','Authorization': this.appService.token});
     return this.http.post(this.config.apiEndpoint+'orders/',body,{headers: headers})
+      .map((response: Response) => response.json());
+  }
+
+  getOrderItems(id: string){
+    const headers = new Headers({ 'Authorization': this.appService.token});
+    return this.http.get(this.config.apiEndpoint+'orders/'+id+'/items',{headers: headers})
       .map((response: Response) => response.json());
   }
 
