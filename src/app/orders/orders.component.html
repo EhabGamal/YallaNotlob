@@ -1,55 +1,64 @@
-<!--<app-header></app-header>-->
 <app-navbar></app-navbar>
-
-<!--<nav class="ban">
-  <div class="nav-wrapper">
-    <ul id="nav-mobile" class="left hide-on-med-and-down">
-      <li>Orders</li>
-    </ul>
-    <ul id="nav-mobile" class="right hide-on-med-and-down">
-      <!--<li><a [routerLink]="['/addorder']" >Start New Order</a></li>
-       <li><a class="waves-effect waves-light btn-large" [routerLink]="['/addorder']">Start New Order</a></li>
+<div class="row" style="height: 460px">
+  <div class="col s12 center-align">
+    <h4>My Orders</h4>
   </div>
-</nav>-->
-
-<div>
-   <h3 id="le"> Orders </h3>
-   <a id="ri" class="waves-effect btn-large red darken-1" [routerLink]="['/addorder']">Start New Order</a>
-</div>
-
-<div class="main" >
+  <div class="col s12 fit-height">
+    <div class="card fit-height">
       <table>
         <thead>
-          <tr>
-              <th>Order</th>
-              <th>Resturants</th>
-              <th>Invited</th>
-              <th>Joined</th>
-              <th>Status</th>
-              
-              <th>Actions</th>
-          </tr>
+        <tr>
+          <th>Order</th>
+          <th>Meal</th>
+          <th>User</th>
+          <th>Restaurant</th>
+          <th>Invited</th>
+          <th>Joined</th>
+          <th>Actions</th>
+        </tr>
         </thead>
+
         <tbody>
-          <tr *ngFor="let order of orders">
-            <td>{{order.for}}</td>
-            <td>TEST</td>
-            <td>{{order.invited.length}}</td>
-            <td>{{order.joined.length}}</td>
-            <td>TEST</td>
-            <td>
-              <a class="waves-effect waves-teal btn-flat pink lighten-4" [routerLink]="['/vieworder']" >View</a>
-               <a class="waves-effect waves-teal btn-flat pink lighten-4" id={{order.id}} (click)="finishOrder($event)" type="submit">Finish</a>
-                <a class="waves-effect waves-teal btn-flat pink lighten-4" id={{order.id}} (click)="cancelOrder($event)" type="submit">Cancel</a>
-            </td>
-          </tr>
+        <tr>
+          <td>Note</td>
+          <td>Breakfast</td>
+          <td>Ehab</td>
+          <td>KFC</td>
+          <td>5</td>
+          <td>7</td>
+          <td>
+            <a class="waves-effect green-text"><i class="material-icons">check</i></a>
+            <a class="waves-effect red-text"><i class="material-icons">close</i></a>
+          </td>
+        </tr>
+        <tr *ngFor="let order of orders.owned">
+          <td>{{order.name}}</td>
+          <td>{{order.for}}</td>
+          <td>{{getFriendName(order.owner)}}</td>
+          <td>{{order.provider.name}}</td>
+          <td>{{order.invited.length}}</td>
+          <td>{{order.joined.length}}</td>
+          <td>
+            <a class="waves-effect green-text"><i class="material-icons">check</i></a>
+            <a class="waves-effect red-text"><i class="material-icons">close</i></a>
+            <a class="waves-effect red-text" [routerLink]="['/vieworder/',order._id]"><i class="material-icons">info</i></a>
+          </td>
+        </tr>
+        <tr *ngFor="let order of orders.invited">
+          <td>{{order.name}}</td>
+          <td>{{order.for}}</td>
+          <td>{{getFriendName(order.owner)}}</td>
+          <td>{{order.provider.name}}</td>
+          <td>{{order.invited.length}}</td>
+          <td>{{order.joined.length}}</td>
+          <td>
+            <a class="waves-effect green-text"><i class="material-icons">check</i></a>
+            <a class="waves-effect red-text"><i class="material-icons">close</i></a>
+            <a class="waves-effect red-text" [routerLink]="['/vieworder']"><i class="material-icons">info</i></a>
+          </td>
+        </tr>
         </tbody>
       </table>
-</div>
-<div class="pag">
-  <ul class="pagination">
-    <li class="disabled"><a href="#"><i class="material-icons">chevron_left</i></a></li>
-    <li class="active"><a href="#">1</a></li>
-    <li class="waves-effect"><a href="#"><i class="material-icons">chevron_right</i></a></li>
-  </ul>
+    </div>
+  </div>
 </div>
