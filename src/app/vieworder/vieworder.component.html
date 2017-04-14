@@ -1,62 +1,64 @@
 <app-navbar></app-navbar>
-
-<div>
-   <h3 id="le"> Order Details </h3>
-
-  <div id="ri">
-  <!-- Modal Trigger -->
-  <a class="waves-effect waves-light btn" href="#modal1">Modal</a>
-
-  <!-- Modal Structure -->
-  <div id="ri" class="modal">
-    <div class="modal-content">
-      <h4>Modal Header</h4>
-      <p>A bunch of text</p>
-    </div>
-    <div class="modal-footer">
-      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-    </div>
+<div class="row" style="height: 460px">
+  <div class="col s12 center-align">
+    <h4>My Orders</h4>
   </div>
-</div>
-
-
-  <div id="ri">
-  <!-- Modal Trigger -->
-  <a class="waves-effect waves-light btn" href="#modal1">Modal</a>
-
-  <!-- Modal Structure -->
-  <div id="ri" class="modal">
-    <div class="modal-content">
-      <h4>Modal Header</h4>
-      <p>A bunch of text</p>
-    </div>
-    <div class="modal-footer">
-      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-    </div>
-  </div>
-</div>
-
-</div>
-
-<div class="main" >
+  <div class="col s12 fit-height">
+    <div class="card fit-height">
       <table>
         <thead>
-          <tr>
-              <th>Person</th>
-              <th>Item</th>
-              <th>Amount</th>
-              <th>Price</th>
-              <th>Comment</th>
-          </tr>
+        <tr>
+          <th>Order</th>
+          <th>Meal</th>
+          <th>User</th>
+          <th>Restaurant</th>
+          <th>Invited</th>
+          <th>Joined</th>
+          <th>Actions</th>
+        </tr>
         </thead>
+
         <tbody>
-          <tr>
-            <td>TEST</td>
-            <td>TEST</td>
-            <td>TEST</td>
-            <td>TEST</td>
-            <td>TEST</td>
-          </tr>
+        <tr>
+          <td>Note</td>
+          <td>Breakfast</td>
+          <td>Ehab</td>
+          <td>KFC</td>
+          <td>5</td>
+          <td>7</td>
+          <td>
+            <a class="waves-effect green-text"><i class="material-icons">check</i></a>
+            <a class="waves-effect red-text"><i class="material-icons">close</i></a>
+          </td>
+        </tr>
+        <tr *ngFor="let order of orders.owned">
+          <td>{{order.name}}</td>
+          <td>{{order.for}}</td>
+          <td>{{getFriendName(order.owner)}}</td>
+          <td>{{order.provider.name}}</td>
+          <td>{{order.invited.length}}</td>
+          <td>{{order.joined.length}}</td>
+          <td>
+            <a class="waves-effect green-text"><i class="material-icons">check</i></a>
+            <a class="waves-effect red-text"><i class="material-icons">close</i></a>
+            <a class="waves-effect red-text" [routerLink]="['/vieworder/',order._id]"><i class="material-icons">info</i></a>
+          </td>
+        </tr>
+        <tr *ngFor="let order of orders.joined">
+          <td>{{order.name}}</td>
+          <td>{{order.for}}</td>
+          <td>{{getFriendName(order.owner)}}</td>
+          <td>{{order.provider.name}}</td>
+          <td>{{order.invited.length}}</td>
+          <td>{{order.joined.length}}</td>
+          <td>
+            <a class="waves-effect green-text"><i class="material-icons">check</i></a>
+            <a class="waves-effect red-text"><i class="material-icons">close</i></a>
+            <a class="waves-effect red-text" [routerLink]="['/vieworder']"><i class="material-icons">info</i></a>
+          </td>
+        </tr>
         </tbody>
       </table>
+    </div>
+  </div>
 </div>

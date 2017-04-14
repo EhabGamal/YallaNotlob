@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Router, ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-vieworder',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VieworderComponent implements OnInit {
 
-  constructor() { }
+  constructor( private router: ActivatedRoute ) { }
 
   ngOnInit() {
+    this.router.params.subscribe(
+      (data) => { console.log(data) }
+    )
   }
 
 }
