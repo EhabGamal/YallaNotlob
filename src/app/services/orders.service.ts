@@ -48,10 +48,10 @@ export class OrdersService {
   }
 
 //need item route from service
-   addItem(item: any){
+   addItem(id: string, item: any){
     const body = JSON.stringify({item});
     const headers = new Headers({ 'Content-Type': 'application/json','Authorization': this.appService.token});
-    return this.http.post(this.config.apiEndpoint+'orders/',body,{headers: headers})
+    return this.http.post(this.config.apiEndpoint+'orders/'+id+'/add_item',body,{headers: headers})
       .map((response: Response) => response.json());
   }
 

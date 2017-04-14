@@ -17,6 +17,7 @@ export class VieworderComponent implements OnInit {
   private orderID: string = '';
   private order: any = {id:1,name:'Breakfast Order'};
   private availableItems: any = [];
+  private myFriends: any = [];
   private orderItems: any = [];
   private myItems: any = [];
   private newItem: any = {
@@ -37,7 +38,7 @@ export class VieworderComponent implements OnInit {
 
   getOrder(){
     this.ordersService.getOrder(this.orderID).subscribe(
-      (data) => { console.log(data); this.order = data; console.log(this.order); this.getAvailableItems(); },
+      (data) => { console.log(data); this.order = data; console.log(this.order); this.getAvailableItems(); this.getFriends(); },
       (error) => { console.log(error); }
     )
   }
@@ -49,13 +50,30 @@ export class VieworderComponent implements OnInit {
     );
   }
 
+  getFriends(){
+    this.friendsService.getAll(this.appService.user._id).subscribe(
+      (data) => { console.log(data); this.myFriends = data; this.myFriends.push(this.appService.user); this.setOwnerName(); },
+      (error) => { console.log(error); }
+    );
+  }
+
   changeItem(item){
     this.newItem.item = item;
     console.log(this.newItem);
   }
 
   addItem(id: string){
-
+    console.log(this.newItem);
+    if(this.newItem.item != ''){
+      if(this.newItem.amount < 0){
+        this.ordersService.addItem(this.orderID, this.newItem).subscribe(
+          (data) => {console.log(data); this.getOrder();},
+          (error) => {console.log(error)}
+        )
+      }else
+        console.log(this.newItem.amount)
+    }else
+      console.log('empty item name')
   }
 
   removeItem(id: string){
@@ -65,15 +83,20 @@ export class VieworderComponent implements OnInit {
   setItemPrice(){
     //return this.availableItems.filter((item) => item._id == id).map((item) => item.price)
     this.order.items.map((item) => {
-      console.log('item');
-      console.log(item);
-      item.price = this.availableItems.filter((available) => available._id == item.item).map((available) => { console.log('available');console.log(available); return available.price;});
+      this.availableItems.filter((available) => available._id == item.item).map((available) => { item.price = available.price; item.name = available.name;});
+    })
+  };
+
+  setOwnerName(){
+    console.log(this.myFriends);
+    this.order.items.map((item) => {
+      item.ownerName = this.myFriends.filter((friend) => friend._id == item.orderBy).map((friend) => { console.log('friend');console.log(friend); return friend.firstName;});
     })
   }
 
   calcItemPrice(){
-    //this.itemPrice = this.newItem.amount * this.availableItems.filter((item) => item._id == this.newItem.item).map((item) => item.price);
-    //this.calcTotal();
+    this.itemPrice = this.newItem.amount * this.availableItems.filter((item) => item._id == this.newItem.item).map((item) => item.price);
+    this.calcTotal();
   }
 
   calcTotal(){
