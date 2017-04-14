@@ -1,34 +1,40 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { GroupsService } from '../services/groups.service'
 import { ProvidersService } from '../services/providers.service'
 import { AppService } from '../services/app.service'
 import { FriendsService } from "../services/friends.service";
+import { OrdersService } from "../services/orders.service";
 
 @Component({
   selector: 'app-addorder',
   templateUrl: './addorder.component.html',
   styleUrls: ['./addorder.component.css'],
-  providers: [ GroupsService, ProvidersService, FriendsService ]
+  providers: [ GroupsService, ProvidersService, FriendsService, OrdersService ]
 })
 
 export class AddorderComponent implements OnInit {
 
+  @ViewChild('msgModal') modal;
+  private response: any = {
+    msg: '',
+    icon: 'info',
+    color: ''
+  };
+  private order: any = { name:'', 'for':'', provider:'', invited:'' };
+  private email: string = '';
   private myGroups: any = {};
   private invitedGroups: any = {owned:[],joined:[]};
   private myFriends: any = [];
   private invitedFriends: any = [];
   private providers: any = [];
-  private providerValue: any;
-  private loading: boolean = false;
+  private loading: number = 0;
   private mealsOptions: any = [
-    { name:'Breakfast', value:'breakfast'},
-    { name:'Lunch', value:'lunch'},
-    { name:'Dinner', value:'dinner'}
+    { name:'Breakfast', value:'Breakfast'},
+    { name:'Lunch', value:'Lunch'},
+    { name:'Dinner', value:'Dinner'}
   ];
-  private mealValue: any;
-  private email: string = '';
 
-  constructor(private appService: AppService, private groupsService: GroupsService, private friendsService: FriendsService, private providersService: ProvidersService) { }
+  constructor(private appService: AppService, private groupsService: GroupsService, private friendsService: FriendsService, private providersService: ProvidersService,  private ordersService: OrdersService) { }
 
   ngOnInit() {
     this.loadMyGroups();
@@ -37,37 +43,34 @@ export class AddorderComponent implements OnInit {
   }
 
   changeMeal(newValue) {
-    this.mealValue = newValue;
+    this.order['for'] = newValue;
   }
 
   changeProvider(newValue) {
-    this.providerValue = newValue;
+    this.order.provider = newValue;
   }
 
   loadMyGroups(){
-    this.loading = true;
+    this.loading++;
     this.groupsService.getAll(this.appService.user._id).subscribe(
-      (data: any) => { this.myGroups = data; console.log(this.myGroups.owned); },
-      (error: any) => { this.loading = false; },
-      () => { this.loading = false; }
+      (data: any) => { this.myGroups = data; this.loading--; console.log(this.myGroups.owned); },
+      (error: any) => { this.loading--; },
     );
   }
 
   loadMyFriends(){
-    this.loading = true;
+    this.loading++;
     this.friendsService.getAll(this.appService.user._id).subscribe(
-      (data: any) => { this.myFriends = data; console.log(this.myFriends); },
-      (error: any) => { this.loading = false; },
-      () => { this.loading = false; }
+      (data: any) => { this.myFriends = data; this.loading--; console.log(this.myFriends); },
+      (error: any) => { this.loading--; }
     );
   }
 
   loadProviders(){
-    this.loading = true;
+    this.loading++;
     this.providersService.getAll().subscribe(
-      (data: any) => { this.providers = data; console.log(this.providers); },
-      (error: any) => { this.loading = false; },
-      () => { this.loading = false; }
+      (data: any) => { this.providers = data; this.loading--; console.log(this.providers); },
+      (error: any) => { this.loading--; }
     );
   }
 
@@ -98,10 +101,56 @@ export class AddorderComponent implements OnInit {
     let members: any = [];
     for(let type in this.invitedGroups){
       this.invitedGroups[type].forEach((group) => {
-        group.members.forEach((friend) => { members.push(friend.email); })
+        group.members.forEach((friend) => { if(members.indexOf(friend._id)==-1) members.push(friend._id); })
       });
     }
-    console.log(members);
+    this.invitedFriends.forEach((friend) => {
+      if(members.indexOf(friend._id)==-1) members.push(friend._id);
+    });
+    this.order.invited = members;
+    this.saveOrder();
+  }
+
+  saveOrder(){
+    if(this.order.name != ''){
+      if(this.order['for'] != ''){
+        if(this.order.provider != ''){
+          if(this.order.invited.length != 0){
+            console.log(this.order);
+            this.loading++;
+            this.ordersService.addOrder(this.order).subscribe(
+              (data: any) => { console.log(data); this.loading--; this.setModalMsg('Order Added Successfully!',0); },
+              (error: any) => { this.loading--; },
+            );
+          }else
+            this.setModalMsg('You must invite at least one friend!',2);
+        }else
+          this.setModalMsg('Select Restaurant!',2);
+      }else
+        this.setModalMsg('Select Meal Type!',2);
+
+    }else
+      this.setModalMsg('You Must enter Order Note!',2);
+  }
+
+  setModalMsg(msg: string, state: number){
+    switch (state){
+      case 1:
+        this.response = {msg:msg, icon:'check', color:'green-text'};
+        break;
+      case 2:
+        this.response = {msg:msg, icon:'warning', color:'orange-text'};
+        break;
+      default:
+      case 0:
+        this.response = {msg:msg, icon:'close', color:'red-text'};
+        break;
+    }
+    this.showModal();
+  }
+
+  showModal(){
+    this.modal.modalActions.emit({action:"modal",params:['open']});
   }
 
 }

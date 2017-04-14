@@ -4,15 +4,19 @@
   <h5 class="center-align">Create New Order</h5>
     <div class="col s12 m4 card fit-height">
       <div class="input-field col s12">
+        <input name="note" id="note" type="text" [(ngModel)]="order.name" required>
+        <label for="note">Order Note</label>
+      </div>
+      <div class="input-field col s12">
         <h5>Order For</h5>
-        <select materialize="material_select" [materializeSelectOptions]="mealsOptions" [ngModel]="mealValue" (ngModelChange)="changeMeal($event)">
+        <select materialize="material_select" [materializeSelectOptions]="mealsOptions" [ngModel]="order['for']" (ngModelChange)="changeMeal($event)">
           <option value="" disabled selected>Choose your meal</option>
           <option *ngFor="let option of mealsOptions" [value]="option.value">{{option.name}}</option>
         </select>
       </div>
       <div class="input-field col s12">
         <h5>Select Restaurant</h5>
-        <select materialize="material_select" class="icons" [materializeSelectOptions]="providers" [ngModel]="providerValue" (ngModelChange)="changeProvider($event)">
+        <select materialize="material_select" class="icons" [materializeSelectOptions]="providers" [ngModel]="order.provider" (ngModelChange)="changeProvider($event)">
           <option value="" disabled selected>Choose your restaurant</option>
           <option *ngFor="let option of providers" [value]="option._id" data-icon="option.logo" class="circle">{{option.name}}</option>
         </select>
@@ -74,3 +78,5 @@
       </ul>
     </div>
 </div>
+<app-modal #msgModal [data]='response' ></app-modal>
+<app-loading *ngIf="loading"></app-loading>
