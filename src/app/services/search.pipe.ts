@@ -1,7 +1,8 @@
 import { Injectable, Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'search'
+  name: 'search',
+  pure: false
 })
 
 @Injectable()

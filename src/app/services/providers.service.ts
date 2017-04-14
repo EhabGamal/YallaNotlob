@@ -15,4 +15,10 @@ export class ProvidersService {
       .map((response: Response) => response.json());
   }
 
+  getItems(id: string){
+    const headers = new Headers({ 'Content-Type': 'application/json','Authorization': this.appService.token});
+    return this.http.get(this.config.apiEndpoint+'providers/'+id+'/items',{headers: headers})
+      .map((response: Response) => response.json());
+  }
+
 }

@@ -1,62 +1,67 @@
 <app-navbar></app-navbar>
-
-<div>
-   <h3 id="le"> Order Details </h3>
-
-  <div id="ri">
-  <!-- Modal Trigger -->
-  <a class="waves-effect waves-light btn" href="#modal1">Modal</a>
-
-  <!-- Modal Structure -->
-  <div id="ri" class="modal">
-    <div class="modal-content">
-      <h4>Modal Header</h4>
-      <p>A bunch of text</p>
-    </div>
-    <div class="modal-footer">
-      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+<div class="row" style="height: 460px">
+  <div class="col s12 center-align">
+    <h4>{{order.name}}</h4>
+  </div>
+  <div class="col s12">
+    <div class="row no-padding no-margin valign-wrapper">
+      <div class="input-field col s2">
+        <select materialize="material_select" [materializeSelectOptions]="availableItems" [ngModel]="newItem.item" (ngModelChange)="changeItem($event)">
+          <option value="" disabled selected>Choose your meal</option>
+          <option *ngFor="let item of availableItems" [value]="item._id" data-icon="ite.image" class="circle left">
+            {{item.name}} - {{item.price}} EGP
+          </option>
+        </select>
+      </div>
+      <div class="input-field col s1">
+        <input name="amount" id="amount" type="number" min="1" value="1" [(ngModel)]="newItem.amount" (ngModelChange)="calcItemPrice()">
+        <label for="amount">Amount</label>
+      </div>
+      <div class="input-field col s3">
+        <input name="comment" id="comment" type="text" [(ngModel)]="newItem.comment">
+        <label for="comment">Comment</label>
+      </div>
+      <div class="col s2 center-align">
+        <h4>Price {{itemPrice}}</h4>
+      </div>
+      <div class="col s2 center-align">
+        <h4>Total {{total}}</h4>
+      </div>
+      <div class="col s2 valign">
+        <a class="btn-floating waves-effect waves-light red center" (click)="addItem()"><i class="material-icons">add</i></a>
+      </div>
     </div>
   </div>
-</div>
-
-
-  <div id="ri">
-  <!-- Modal Trigger -->
-  <a class="waves-effect waves-light btn" href="#modal1">Modal</a>
-
-  <!-- Modal Structure -->
-  <div id="ri" class="modal">
-    <div class="modal-content">
-      <h4>Modal Header</h4>
-      <p>A bunch of text</p>
-    </div>
-    <div class="modal-footer">
-      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-    </div>
-  </div>
-</div>
-
-</div>
-
-<div class="main" >
+  <div class="col s12 fit-height">
+    <div class="card fit-height">
       <table>
         <thead>
-          <tr>
-              <th>Person</th>
-              <th>Item</th>
-              <th>Amount</th>
-              <th>Price</th>
-              <th>Comment</th>
-          </tr>
+        <tr>
+          <th>Item</th>
+          <th>By</th>
+          <th>Amount</th>
+          <th>Price</th>
+          <th>Total</th>
+          <th>Notes</th>
+          <th>Actions</th>
+        </tr>
         </thead>
+
         <tbody>
-          <tr>
-            <td>TEST</td>
-            <td>TEST</td>
-            <td>TEST</td>
-            <td>TEST</td>
-            <td>TEST</td>
-          </tr>
+        <tr *ngFor="let item of order.items">
+          <td>{{item.name}}</td>
+          <td>{{item.ownerName}}</td>
+          <td>{{item.amount}}</td>
+          <td>{{item.price}} EGP</td>
+          <td>{{item.price*item.amount}}</td>
+          <td>{{item.comment}}</td>
+          <td>
+            <a class="waves-effect red-text"><i class="material-icons">delete</i></a>
+          </td>
+        </tr>
         </tbody>
       </table>
+    </div>
+  </div>
 </div>
+<app-loading *ngIf="loading"></app-loading>
