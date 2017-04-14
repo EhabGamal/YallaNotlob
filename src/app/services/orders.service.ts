@@ -52,6 +52,12 @@ export class OrdersService {
   }
 
 
+  latestOrders(id: string){
+    const headers = new Headers({ 'Authorization': this.appService.token});
+    return this.http.get(this.config.apiEndpoint+'orders/?limit=3',{headers: headers})
+      .map((response: Response) => response.json());
+  }
+
 
 
 }
