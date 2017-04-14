@@ -36,11 +36,12 @@
             <td>TEST</td>
             <td>{{order.invited.length}}</td>
             <td>{{order.joined.length}}</td>
-            <td>TEST</td>
+            <td>{{order.checkout}}</td>
             <td>
               <a class="waves-effect waves-teal btn-flat pink lighten-4" [routerLink]="['/vieworder']" >View</a>
-               <a class="waves-effect waves-teal btn-flat pink lighten-4" id={{order.id}} (click)="finishOrder($event)" type="submit">Finish</a>
-                <a class="waves-effect waves-teal btn-flat pink lighten-4" id={{order.id}} (click)="cancelOrder($event)" type="submit">Cancel</a>
+              <a class="waves-effect waves-teal btn-flat pink lighten-4" id={{order.id}} (click)="finishOrder($event)" type="submit">Finish</a>
+              <a class="waves-effect waves-teal btn-flat pink lighten-4" id={{order.id}} (click)="cancelOrder($event)" type="submit">Cancel</a>
+              <a class="waves-effect waves-teal btn-flat pink lighten-4"  (click)="allProviders($event)" type="submit">Providers </a>
             </td>
           </tr>
         </tbody>

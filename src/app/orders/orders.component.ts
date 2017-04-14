@@ -1,18 +1,21 @@
 import { Component, OnInit,EventEmitter } from '@angular/core';
 import { OrdersService } from '../services/orders.service'
 import { AppService } from '../services/app.service'
+import { ProvidersService } from '../services/providers.service'
 import { MaterializeAction } from 'angular2-materialize';
 
 @Component({
   selector: 'app-orders',
   templateUrl: './orders.component.html',
   styleUrls: ['./orders.component.css'],
-  providers: [ OrdersService ]
+  providers: [ OrdersService ,ProvidersService ]
 })
 export class OrdersComponent implements OnInit {
    public orders: any = [];
+   private providers: any = [];
+   private providerValue: any;
  
-  constructor(private appService: AppService, private ordersService: OrdersService) { }
+  constructor(private appService: AppService, private ordersService: OrdersService ,private providersService: ProvidersService) { }
 
    ngOnInit() {
      this.getOrders();
@@ -37,7 +40,6 @@ export class OrdersComponent implements OnInit {
       (error: any) => { },
       () => { }
      );
-     console.log(order_id)
    }
 
    cancelOrder(event:any){
@@ -51,6 +53,14 @@ export class OrdersComponent implements OnInit {
      );
      console.log(order_id)
    } 
+
+   allProviders(){
+    this.providersService.getAll().subscribe(
+      (data: any) => { this.providers = data; console.log(this.providers); console.log(this.providers[0].name);},
+      (error: any) => {  },
+      () => {  }
+    );
+  }
 
 //   view(event: any) {
 

@@ -27,4 +27,10 @@ export class FriendsService {
       .map((response: Response) => response.json());
   }
 
+   friendsActivities(id: string){
+    const headers = new Headers({ 'Authorization': this.appService.token});
+    return this.http.get(this.config.apiEndpoint+'users/'+id+'/friends'+'/activities',{headers: headers})
+      .map((response: Response) => response.json());
+  }
+
 }
