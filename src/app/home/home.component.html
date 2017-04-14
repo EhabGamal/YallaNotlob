@@ -23,12 +23,19 @@
     <div class="card">
       <div class="card-content">
         <span class="card-title">Latest Orders</span>
-        <div class="collection">
+         <ul class="collection">
+          <li class="collection-item avatar" *ngFor="let orders of latestorders">
+            <p>{{orders.for}} </p>
+            On
+            <span class="title">{{orders.createdAt}} </span>
+          </li>
+          <!--<a class="waves-effect waves-teal btn-flat pink lighten-4"  (click)="latestOrders($event)" type="submit">latest orders </a>-->
+          <!--<li class="collection-item dismissable" > {{order.createdAt}} </li>-->
+          <!--<a href="#!" class="collection-item dismissable">Alvin</a>
           <a href="#!" class="collection-item dismissable">Alvin</a>
           <a href="#!" class="collection-item dismissable">Alvin</a>
-          <a href="#!" class="collection-item dismissable">Alvin</a>
-          <a href="#!" class="collection-item dismissable">Alvin</a>
-        </div>
+          <a href="#!" class="collection-item dismissable">Alvin</a>-->
+        </ul>
       </div>
     </div>
   </div>
@@ -40,9 +47,8 @@
           <li class="collection-item avatar" *ngFor="let fActivity of friendsActivities">
             <img src="{{fActivity.image}}" alt="" class="circle">
             <span class="title">{{fActivity.firstName}} {{fActivity.lastName}}</span>
-            <div style="display:none;" *ngFor="let activity of activities" ></div>
-            <p> </p>
-            <a (click)="modal.openModal()" class="secondary-content"><i class="material-icons">announcement</i></a>
+            <!--<div style="display:none;" *ngFor="let activity of activities" ></div>
+            <p>{{activity.message}}</p>-->
           </li>
         </ul>
       </div>
