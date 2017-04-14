@@ -10,24 +10,27 @@ import {NotificationsService} from '../services/notifications.service';
 })
 export class NotificationsComponent implements OnInit, OnDestroy {
 
-  private notifications: any = [{message: ''}];
+  private notifications: any = [];
   private connection;
-  private notification: any = {to: '58e81de8639dbf5998125e64', link: 'salama.com', message: 'salama added you to the order'};
+  private notification: any = {to: '58e81de8639dbf5998125e64', link: 'salama.com', message: 'salamadssdsdsdsd', type: 'invitation'};
 
   constructor( private socketService: SocketService ) { }
 
   ngOnInit(): void {
     this.connection = this.socketService.get().subscribe((data) => {
+      if (data.type === 'notification') {
+        this.notifications.push(data.data);
+      }
+        if (data.type === 'checkout') {
+          this.notifications.push(data.data);
+        }
+
       console.log(data);
     },
       (err) => {
         console.log(err);
       }
     );
-    // this.connection = this.notificationService.getNotifications().subscribe( notification => {
-    //   this.notifications.push(notification);
-    //   console.log('new notification');
-    // });
   }
 
   ngOnDestroy(): void {

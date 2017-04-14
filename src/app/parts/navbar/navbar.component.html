@@ -1,21 +1,8 @@
 <ul id="dropdown1" class="dropdown-content collection">
-  <li class="collection-item avatar">
+  <li *ngFor="let notification of notifications;" class="collection-item avatar" (click)="seeNotification(notification._id)">
     <i class="material-icons circle">group</i>
-    <span class="title">Ehab invited you to his order</span>
+    <span class="title">{{notification.message}}</span>
   </li>
-  <li class="collection-item avatar">
-    <i class="material-icons circle">group</i>
-    <span class="title">Ehab invited you to his order</span>
-  </li>
-  <li class="collection-item avatar">
-    <i class="material-icons circle">group</i>
-    <span class="title">Ehab invited you to his order</span>
-  </li>
-  <li class="collection-item avatar">
-    <i class="material-icons circle">group</i>
-    <span class="title">Ehab invited you to his order</span>
-  </li>
-  <li class="collection-item">View All Notifications</li>
 </ul>
 <nav class="red darken-1" role="navigation">
   <div class="nav-wrapper container">
