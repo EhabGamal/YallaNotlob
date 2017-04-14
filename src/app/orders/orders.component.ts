@@ -17,14 +17,14 @@ export class OrdersComponent implements OnInit {
 
   constructor(private appService: AppService, private ordersService: OrdersService, private friendsService: FriendsService) { }
 
-   ngOnInit() {
-     this.getOrders();
-     this.getFriends();
-   }
+  ngOnInit() {
+    this.getOrders();
+    this.getFriends();
+  }
 
   getOrders(){
-     this.ordersService.getOrders(this.appService.user._id).subscribe(
-       (data: any) => { this.orders = data; console.log(this.orders); },
+    this.ordersService.getOrders(this.appService.user._id).subscribe(
+      (data: any) => { this.orders = data; console.log(this.orders); },
       (error: any) => { }
     );
   }
@@ -42,30 +42,30 @@ export class OrdersComponent implements OnInit {
     })
   }
 
-   finishOrder(event:any){
+  finishOrder(event:any){
     var target = event.target ;
     var idAttr = target.attributes.id;
     var order_id = idAttr.nodeValue;
     console.log(order_id)
     this.ordersService.finishOrder(order_id).subscribe(
-    (data: any) => { this.getOrders(); console.log(this.orders); },
+      (data: any) => { this.getOrders(); console.log(this.orders); },
       (error: any) => { },
       () => { }
-     );
-     console.log(order_id)
-   }
+    );
+    console.log(order_id)
+  }
 
-   cancelOrder(event:any){
+  cancelOrder(event:any){
     var target = event.target ;
     var idAttr = target.attributes.id;
     var order_id = idAttr.nodeValue;
     this.ordersService.cancelOrder(order_id).subscribe(
-    (data: any) => { this.getOrders(); console.log(this.orders); },
+      (data: any) => { this.getOrders(); console.log(this.orders); },
       (error: any) => { },
       () => { }
-     );
-     console.log(order_id)
-   }
+    );
+    console.log(order_id)
+  }
 
 
- }
+}
