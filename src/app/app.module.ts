@@ -11,7 +11,6 @@ import { LoginComponent } from './login/login.component';
 import { OrdersComponent } from './orders/orders.component';
 import { AddorderComponent } from './addorder/addorder.component';
 import { VieworderComponent } from './vieworder/vieworder.component';
-import { HeaderComponent } from './header.component';
 import { NavbarComponent } from './parts/navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { SignupComponent } from './signup/signup.component';
@@ -34,7 +33,6 @@ import { ProvidersComponent } from './providers/providers.component'
     OrdersComponent,
     AddorderComponent,
     VieworderComponent,
-    HeaderComponent,
     NavbarComponent,
     HomeComponent,
     SignupComponent,

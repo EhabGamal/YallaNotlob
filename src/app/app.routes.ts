@@ -20,7 +20,7 @@ const APP_ROUTES: Routes = [
   { path: 'friends', component: FriendsComponent, canActivate: [AuthGuard] },
   { path: 'groups', component: GroupsComponent, canActivate: [AuthGuard] },
   { path: 'orders', component: OrdersComponent, canActivate: [AuthGuard] },
-  { path: 'vieworder', component: VieworderComponent, canActivate: [AuthGuard] },
+  { path: 'vieworder/:id', component: VieworderComponent, canActivate: [AuthGuard] },
   { path: 'addorder', component: AddorderComponent, canActivate: [AuthGuard] },
   { path: 'notifications', component: NotificationsComponent, canActivate: [AuthGuard] },
   { path: '**', component: NotFoundComponent }
