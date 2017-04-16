@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
 <div class="row" style="height: 460px">
   <div class="col s12 center-align">
-    <h4>My Orders</h4>
+    <h4>My Orders <a class="btn-floating waves-effect red modal-trigger" [routerLink]="['/addorder']"><i class="material-icons">add</i></a></h4>
   </div>
   <div class="col s12 fit-height">
     <div class="card fit-height">
@@ -19,42 +19,28 @@
         </thead>
 
         <tbody>
-        <tr>
-          <td>Note</td>
-          <td>Breakfast</td>
-          <td>Ehab</td>
-          <td>KFC</td>
-          <td>5</td>
-          <td>7</td>
-          <td>
-            <a class="waves-effect green-text"><i class="material-icons">check</i></a>
-            <a class="waves-effect red-text"><i class="material-icons">close</i></a>
-          </td>
-        </tr>
         <tr *ngFor="let order of orders.owned">
           <td>{{order.name}}</td>
           <td>{{order.for}}</td>
           <td>{{getFriendName(order.owner)}}</td>
-          <td>{{order.provider.name}}</td>
+          <td>{{order.provider?.name}}</td>
           <td>{{order.invited.length}}</td>
           <td>{{order.joined.length}}</td>
           <td>
-            <a class="waves-effect green-text"><i class="material-icons">check</i></a>
-            <a class="waves-effect red-text"><i class="material-icons">close</i></a>
-            <a class="waves-effect red-text" [routerLink]="['/vieworder/',order._id]"><i class="material-icons">info</i></a>
+            <a class="waves-effect red-text" (click)="deleteOrder(order._id)" materialize="tooltip" class="tooltipped" data-tooltip="Delete Order" ><i class="material-icons">delete</i></a>
+            <a class="waves-effect red-text" [routerLink]="['/vieworder/',order._id]" materialize="tooltip" class="tooltipped" data-tooltip="View Order"><i class="material-icons">remove_red_eye</i></a>
           </td>
         </tr>
         <tr *ngFor="let order of orders.joined">
           <td>{{order.name}}</td>
           <td>{{order.for}}</td>
           <td>{{getFriendName(order.owner)}}</td>
-          <td>{{order.provider.name}}</td>
+          <td>{{order.provider?.name}}</td>
           <td>{{order.invited.length}}</td>
           <td>{{order.joined.length}}</td>
           <td>
-            <a class="waves-effect green-text"><i class="material-icons">check</i></a>
-            <a class="waves-effect red-text"><i class="material-icons">close</i></a>
-            <a class="waves-effect red-text" [routerLink]="['/vieworder']"><i class="material-icons">info</i></a>
+            <a class="waves-effect red-text" (click)="leaveOrder(order._id)" materialize="tooltip" class="tooltipped" data-tooltip="Leave Order" ><i class="material-icons">exit_to_app</i></a>
+            <a class="waves-effect red-text" [routerLink]="['/vieworder',order._id]" materialize="tooltip" class="tooltipped" data-tooltip="View Order"><i class="material-icons" >remove_red_eye</i></a>
           </td>
         </tr>
         </tbody>
@@ -62,3 +48,5 @@
     </div>
   </div>
 </div>
+<app-loading *ngIf="loading"></app-loading>
+<app-modal #msgModal [data]='response' ></app-modal>

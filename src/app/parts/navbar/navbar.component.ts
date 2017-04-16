@@ -1,8 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AppService } from '../../services/app.service';
-import { SocketService } from '../../services/socket.service';
-import { NotificationsService } from '../../services/notifications.service';
-
+import { LoginService } from '../../services/login.service';
+import {SocketService} from '../../services/socket.service';
+import {NotificationsService} from '../../services/notifications.service';
 
 @Component({
   selector: 'app-navbar',
@@ -15,7 +16,7 @@ export class NavbarComponent implements OnInit {
   private notifications: any = [];
   private checkoutData: any;
   private checkedOut: boolean;
-  constructor(private appService: AppService, private socketService: SocketService, private notificationService: NotificationsService) { this.user = appService.user; }
+  constructor(private appService: AppService, private loginService: LoginService, private router: Router, private socketService: SocketService, private notificationService: NotificationsService) { this.user = appService.user; }
 
   ngOnInit(): void {
     this.notificationService.getAll().subscribe(
@@ -44,4 +45,10 @@ export class NavbarComponent implements OnInit {
   seeNotification(notificationId) {
     this.socketService.see(notificationId);
   }
+
+  logout() {
+    this.loginService.logout();
+    this.router.navigate(['/login']);
+  }
+
 }
