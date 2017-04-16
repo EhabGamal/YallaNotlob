@@ -204,7 +204,7 @@ export class VieworderComponent implements OnInit {
         console.log(data);
         this.receipt = data;
         this.customers = Object.keys(this.receipt);
-        // this.openCheckOutModal();
+        this.openCheckOutModal();
         this.socketService.checkout({id: this.orderID});
       },
       (error) => {

@@ -64,7 +64,7 @@
     </div>
   </div>
 </div>
-<div id="checkoutModal" class="modal" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="orderModalActions">
+<div id="checkoutModal" class="modal" materialize="modal" [materializeParams]="[{dismissible: true}]" [materializeActions]="orderModalActions">
   <div class="modal-content center">
     <h4>{{order.name}} Checkout</h4>
     <ul class="collapsible" materialize="collapsible" [materializeParams]="['open',0]" data-collapsible="accordion">

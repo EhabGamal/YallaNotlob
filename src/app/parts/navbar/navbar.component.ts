@@ -14,7 +14,7 @@ import {OrdersService} from '../../services/orders.service';
 })
 export class NavbarComponent implements OnInit {
 
-  public checkoutModalActions = new EventEmitter<string|MaterializeAction>();
+  private checkoutModalActions = new EventEmitter<string|MaterializeAction>();
   public user: any;
   private notifications: any = [];
   private checkoutData: any = [];
