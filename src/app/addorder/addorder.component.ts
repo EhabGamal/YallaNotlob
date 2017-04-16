@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import { GroupsService } from '../services/groups.service'
 import { ProvidersService } from '../services/providers.service'
 import { AppService } from '../services/app.service'
+import { SocketService } from '../services/socket.service'
 import { FriendsService } from "../services/friends.service";
 import { OrdersService } from "../services/orders.service";
 
@@ -34,7 +35,14 @@ export class AddorderComponent implements OnInit {
     { name:'Dinner', value:'Dinner'}
   ];
 
-  constructor(private appService: AppService, private groupsService: GroupsService, private friendsService: FriendsService, private providersService: ProvidersService,  private ordersService: OrdersService) { }
+  constructor(
+    private appService: AppService,
+    private socketService: SocketService,
+    private groupsService: GroupsService,
+    private friendsService: FriendsService,
+    private providersService: ProvidersService,
+    private ordersService: OrdersService
+  ) { }
 
   ngOnInit() {
     this.loadMyGroups();
@@ -119,8 +127,8 @@ export class AddorderComponent implements OnInit {
             console.log(this.order);
             this.loading++;
             this.ordersService.addOrder(this.order).subscribe(
-              (data: any) => { console.log(data); this.loading--; this.setModalMsg('Order Added Successfully!',1); },
-              (error: any) => { this.loading--; },
+              (data: any) => { console.log(data); this.loading--; this.setModalMsg('Order Added Successfully!',1); this.notifyInvited(data.id); },
+              (error: any) => { this.loading--; console.log(error) },
             );
           }else
             this.setModalMsg('You must invite at least one friend!',2);
@@ -131,6 +139,18 @@ export class AddorderComponent implements OnInit {
 
     }else
       this.setModalMsg('You Must enter Order Note!',2);
+  }
+
+  notifyInvited(orderID: any){
+    this.order.invited.forEach((friend) => {
+      let notification: any = {
+        to:friend,
+        link: orderID,
+        message: this.appService.user.firstName+' invited you for '+this.order.name,
+        type: 'invitation'
+      };
+      this.socketService.notify(notification);
+    });
   }
 
   setModalMsg(msg: string, state: number){
