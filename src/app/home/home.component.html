@@ -1,21 +1,20 @@
-<app-navbar></app-navbar>
+<app-navbar #nav></app-navbar>
 <div class="row">
   <div class="col s12 m2">
     <div class="card profile-card">
       <div class="card-image">
-        <img src="assets/images/person0.png">
+        <img src="{{profile.image}}">
         <a class="btn-floating halfway-fab waves-effect waves-light red" (click)="editProfile()"><i class="material-icons">edit</i></a>
       </div>
       <div class="card-content">
-        <span class="card-title">Ehab Gamal</span>
-        <p>ehab.g.sh@gmail.com</p>
+        <span class="card-title">{{profile.firstName}} {{profile.lastName}}</span>
+        <p>{{profile.email}}</p>
       </div>
       <div class="collection">
         <a [routerLink]="['/addorder']" class="collection-item">New Order<a class="secondary-content"><i class="material-icons">add_shopping_cart</i></a></a>
-        <a [routerLink]="['/friends']" class="collection-item active">Friends<a href="#!" class="secondary-content"><i class="material-icons">group_add</i></a></a>
-        <a [routerLink]="['/groups']" class="collection-item">Groups<a href="#!" class="secondary-content"><i class="material-icons">group</i></a></a>
-        <a href="#!" class="collection-item">About<a href="#!" class="secondary-content"><i class="material-icons">info</i></a></a>
-        <a href="#!" class="collection-item">About<a href="#!" class="secondary-content"><i class="material-icons">info</i></a></a>
+        <a [routerLink]="['/orders']" class="collection-item">View Orders<a class="secondary-content"><i class="material-icons">remove_red_eye</i></a></a>
+        <a [routerLink]="['/friends']" class="collection-item">Friends<a class="secondary-content"><i class="material-icons">group_add</i></a></a>
+        <a [routerLink]="['/groups']" class="collection-item">Groups<a class="secondary-content"><i class="material-icons">group</i></a></a>
       </div>
     </div>
   </div>
@@ -62,20 +61,22 @@
       <div class="col s4">
         <img src="{{newProfile.image}}" alt="" class="circle responsive-img">
       </div>
-      <div class="input-field col s8">
-        <input name="fname" id="fname" type="text" [(ngModel)]="newProfile.firstName" required>
-        <label for="fname">First Name</label>
-      </div>
-      <div class="input-field col s8">
-        <input name="lname" id="lname" type="text" [(ngModel)]="newProfile.lastName" required>
-        <label for="lname">Last Name</label>
-      </div>
-      <div class="input-field col s8">
-        <input name="email" id="email" type="email" class="validate" [(ngModel)]="newProfile.email" required>
-        <label for="email">Email</label>
-      </div>
       <div class="col s8">
-        <app-uploader [tag]="'avatar'" [accept]="'image/x-png,image/gif,image/jpeg'" (upload)="uploaded($event)"></app-uploader>
+        <div class="input-field">
+          <input name="fname" id="fname" type="text" [(ngModel)]="newProfile.firstName" required>
+          <label for="fname" class="active">First Name</label>
+        </div>
+        <div class="input-field">
+          <input name="lname" id="lname" type="text" [(ngModel)]="newProfile.lastName" required>
+          <label for="lname" class="active">Last Name</label>
+        </div>
+        <div class="input-field">
+          <input name="email" id="email" type="email" class="validate" [(ngModel)]="newProfile.email" required>
+          <label for="email" class="active">Email</label>
+        </div>
+        <div class="row">
+          <app-uploader [tag]="'avatar'" [accept]="'image/x-png,image/gif,image/jpeg'" (upload)="uploaded($event)"></app-uploader>
+        </div>
       </div>
     </div>
     <div class="modal-footer">
@@ -86,4 +87,4 @@
   </div>
 </div>
 <app-loading *ngIf="loading"></app-loading>
-<app-modal #modal [data]='modalMsg' ></app-modal>
+<app-modal #modal [data]='response' ></app-modal>

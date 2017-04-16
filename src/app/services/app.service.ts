@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
 @Injectable()
 export class AppService {
@@ -17,6 +17,9 @@ export class AppService {
     this.loggedin = value;
   }
 
- 
+  setUser(user: any){
+    localStorage.setItem('user',JSON.stringify(user));
+    this.user = user;
+  }
 
 }

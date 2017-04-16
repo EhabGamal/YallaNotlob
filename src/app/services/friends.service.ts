@@ -14,6 +14,11 @@ export class FriendsService {
     return this.http.get(this.config.apiEndpoint+'users/'+id+'/friends',{headers: headers})
       .map((response: Response) => response.json());
   }
+  getAllOthers(){
+    const headers = new Headers({ 'Authorization': this.appService.token});
+    return this.http.get(this.config.apiEndpoint+'users',{headers: headers})
+      .map((response: Response) => response.json());
+  }
   addFriend(email: string){
     const body = JSON.stringify({email:email});
     const headers = new Headers({ 'Content-Type': 'application/json','Authorization': this.appService.token});
@@ -31,6 +36,20 @@ export class FriendsService {
     const headers = new Headers({ 'Authorization': this.appService.token});
     return this.http.get(this.config.apiEndpoint+'users/'+id+'/friends'+'/activities',{headers: headers})
       .map((response: Response) => response.json());
+  }
+
+  updateUserProfile(id: string, user: any){
+    const body = JSON.stringify(user);
+    console.log(body,id);
+    const headers = new Headers({ 'Content-Type': 'application/json','Authorization': this.appService.token});
+    return this.http.put(this.config.apiEndpoint+'users/'+id+'',body,{headers: headers})
+      .map((response: Response) => response.json());
+  }
+
+  getUserProfile(id: string){
+    const headers = new Headers({ 'Content-Type': 'application/json','Authorization': this.appService.token});
+    return this.http.get(this.config.apiEndpoint+'users/'+id,{headers: headers})
+      .map((response: Response) => response.json())
   }
 
 }

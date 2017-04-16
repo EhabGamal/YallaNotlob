@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 import { AppService } from '../services/app.service';
 import { ProvidersService } from '../services/providers.service';
@@ -13,7 +13,15 @@ import { FriendsService } from '../services/friends.service';
 })
 export class VieworderComponent implements OnInit {
 
+  @ViewChild('msgModal') modal;
+  private response: any = {
+    msg: '',
+    icon: 'info',
+    color: ''
+  };
   private loading: number = 1;
+  private user: any = {};
+
   private orderID: string = '';
   private order: any = {id:1,name:'Breakfast Order'};
   private availableItems: any = [];
@@ -28,7 +36,14 @@ export class VieworderComponent implements OnInit {
   private itemPrice: number = 0;
   private total: number = 0;
 
-  constructor( private router: ActivatedRoute, private appService: AppService, private ordersService: OrdersService, private providersService: ProvidersService, private friendsService: FriendsService ) { }
+  constructor(
+    private router: ActivatedRoute,
+    private appService: AppService,
+    private ordersService: OrdersService,
+    private providersService: ProvidersService,
+    private friendsService: FriendsService ) {
+    this.user = this.appService.user;
+  }
 
   ngOnInit() {
     this.router.params.subscribe(
@@ -37,23 +52,52 @@ export class VieworderComponent implements OnInit {
   }
 
   getOrder(){
+    this.loading++;
     this.ordersService.getOrder(this.orderID).subscribe(
-      (data) => { console.log(data); this.order = data; console.log(this.order); this.getAvailableItems(); this.getFriends(); },
-      (error) => { console.log(error); }
+      (data) => {
+        console.log(data);
+        this.order = data;
+        console.log(this.order);
+        this.getAvailableItems();
+        this.getFriends();
+        this.loading--;
+      },
+      (error) => {
+        console.log(error);
+        this.loading--;
+      }
     )
   }
 
   getAvailableItems(){
+    this.loading++;
     this.providersService.getItems(this.order.provider).subscribe(
-      (data) => { console.log(data); this.availableItems = data; this.setItemPrice(); },
-      (error) => { console.log(error); }
+      (data) => {
+        console.log(data);
+        this.availableItems = data;
+        this.setItemPrice();
+        this.loading--;
+      },
+      (error) => {
+        console.log(error);
+        this.loading--;
+      }
     );
   }
 
   getFriends(){
-    this.friendsService.getAll(this.appService.user._id).subscribe(
-      (data) => { console.log(data); this.myFriends = data; this.myFriends.push(this.appService.user); this.setOwnerName(); },
-      (error) => { console.log(error); }
+    this.loading++;
+    this.friendsService.getAllOthers().subscribe(
+      (data) => {
+        console.log(data);
+        this.myFriends = data;
+        this.setOwnerName();
+        this.loading--;
+      },
+      (error) => {
+        console.log(error);
+        this.loading--;
+      }
     );
   }
 
@@ -65,26 +109,51 @@ export class VieworderComponent implements OnInit {
   addItem(id: string){
     console.log(this.newItem);
     if(this.newItem.item != ''){
-      if(this.newItem.amount < 0){
+      if(this.newItem.amount > 0){
+        this.loading++;
         this.ordersService.addItem(this.orderID, this.newItem).subscribe(
-          (data) => {console.log(data); this.getOrder();},
-          (error) => {console.log(error)}
+          (data) => {
+            console.log(data);
+            this.getOrder();
+            this.resetNewItem();
+            this.loading--;
+            this.setModalMsg(data.message,1);
+            this.showModal();
+          },
+          (error) => {
+            console.log(error);
+            this.loading--;
+            this.setModalMsg(error.json().message,0);
+          }
         )
       }else
-        console.log(this.newItem.amount)
+        this.setModalMsg('Amount Cannot be ZERO!',2);
     }else
-      console.log('empty item name')
+      this.setModalMsg('Select Item to Add',2);
   }
 
   removeItem(id: string){
-
+    this.loading++;
+    this.ordersService.removeItem(this.orderID,id).subscribe(
+      (data) => {
+        this.getOrder();
+        this.loading--;
+        this.setModalMsg(data.message,1);
+        this.showModal();
+      },
+      (error) => {
+        console.log(error);
+        this.loading--;
+        this.setModalMsg(error.json().message,0);
+      }
+    )
   }
 
   setItemPrice(){
-    //return this.availableItems.filter((item) => item._id == id).map((item) => item.price)
     this.order.items.map((item) => {
       this.availableItems.filter((available) => available._id == item.item).map((available) => { item.price = available.price; item.name = available.name;});
     })
+    this.calcTotal();
   };
 
   setOwnerName(){
@@ -92,6 +161,15 @@ export class VieworderComponent implements OnInit {
     this.order.items.map((item) => {
       item.ownerName = this.myFriends.filter((friend) => friend._id == item.orderBy).map((friend) => { console.log('friend');console.log(friend); return friend.firstName;});
     })
+  }
+
+  resetNewItem(){
+    this.newItem = {
+      item:'',
+      amount:0,
+      comment:''
+    };
+    this.calcItemPrice();
   }
 
   calcItemPrice(){
@@ -102,6 +180,26 @@ export class VieworderComponent implements OnInit {
   calcTotal(){
     this.total = this.itemPrice;
     this.order.items.filter((item) => item.orderBy == this.appService.user._id).map((item) => { this.total += item.price * item.amount; })
+  }
+
+  setModalMsg(msg: string, state: number) {
+    switch (state) {
+      case 1:
+        this.response = {msg: msg, icon: 'check', color: 'green-text'};
+        break;
+      case 2:
+        this.response = {msg: msg, icon: 'warning', color: 'orange-text'};
+        break;
+      default:
+      case 0:
+        this.response = {msg: msg, icon: 'close', color: 'red-text'};
+        break;
+    }
+    this.showModal();
+  }
+
+  showModal(){
+    this.modal.modalActions.emit({action:"modal",params:['open']});
   }
 
 }
