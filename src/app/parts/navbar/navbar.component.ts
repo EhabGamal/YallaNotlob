@@ -4,12 +4,14 @@ import { AppService } from '../../services/app.service';
 import { LoginService } from '../../services/login.service';
 import {SocketService} from '../../services/socket.service';
 import {NotificationsService} from '../../services/notifications.service';
-import {MaterializeAction} from "angular2-materialize";
+import {MaterializeAction} from 'angular2-materialize';
+import {Http} from '@angular/http';
+import {OrdersService} from '../../services/orders.service';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  providers: [ NotificationsService]
+  providers: [ NotificationsService , OrdersService]
 })
 export class NavbarComponent implements OnInit {
 
@@ -18,7 +20,7 @@ export class NavbarComponent implements OnInit {
   private notifications: any = [];
   private checkoutData: any = [];
   private checkedOut: boolean;
-  constructor(private appService: AppService, private loginService: LoginService, private router: Router, private socketService: SocketService, private notificationService: NotificationsService) { this.user = appService.user; }
+  constructor(private appService: AppService, private loginService: LoginService, private router: Router, private socketService: SocketService, private notificationService: NotificationsService, private orderService: OrdersService) { this.user = appService.user; }
 
   ngOnInit(): void {
     this.notificationService.getAll().subscribe(
@@ -33,8 +35,8 @@ export class NavbarComponent implements OnInit {
           console.log(data.data);
         }
         if (data.type === 'checkout') {
-          this.checkedOut = true;
-          this.checkoutData.push(data.data);
+          this.openChekOutModal();
+          this.checkoutData = data.data;
         }
 
         console.log(data);
@@ -44,8 +46,9 @@ export class NavbarComponent implements OnInit {
       }
     );
   }
-  seeNotification(notificationId) {
+  seeNotification(notificationId, index) {
     this.socketService.see(notificationId);
+    this.notifications.splice(index, 1);
   }
 
   logout() {
@@ -54,17 +57,26 @@ export class NavbarComponent implements OnInit {
   }
 
   openChekOutModal(){
-    this.checkoutModalActions.emit({action:"modal",params:['open']});
+    this.checkoutModalActions.emit({action: 'modal', params: ['open']});
   }
 
   closeCheckOutModal(){
-    this.checkoutModalActions.emit({action:"modal",params:['close']});
+    this.checkoutModalActions.emit({action: 'modal', params: ['close']});
   }
 
   getChekOutGrandTotal(){
     let grandTotal = 0;
     this.checkoutData.forEach((item) => grandTotal += item.total);
     return grandTotal;
+  }
+  acceptInvitation(notification, index){
+    this.orderService.acceptInvitation(notification.link);
+    this.seeNotification(notification._id, index);
+  }
+
+  refuseInvitation(notification, index){
+    this.orderService.refuseInvitation(notification.link);
+    this.seeNotification(notification._id, index);
   }
 
 }
