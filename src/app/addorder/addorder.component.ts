@@ -29,7 +29,7 @@ export class AddorderComponent implements OnInit {
   private providers: any = [];
   private loading: number = 0;
   private mealsOptions: any = [
-    { name:'Breakfast', value:'Breakfast'},
+    { name:'BreakFast', value:'BreakFast'},
     { name:'Lunch', value:'Lunch'},
     { name:'Dinner', value:'Dinner'}
   ];
@@ -119,7 +119,7 @@ export class AddorderComponent implements OnInit {
             console.log(this.order);
             this.loading++;
             this.ordersService.addOrder(this.order).subscribe(
-              (data: any) => { console.log(data); this.loading--; this.setModalMsg('Order Added Successfully!',0); },
+              (data: any) => { console.log(data); this.loading--; this.setModalMsg('Order Added Successfully!',1); },
               (error: any) => { this.loading--; },
             );
           }else
