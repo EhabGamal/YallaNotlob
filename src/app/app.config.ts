@@ -6,5 +6,5 @@ export interface AppConfig {
   apiEndpoint: string;
 }
 export const AppConfig: AppConfig = {
-  apiEndpoint: 'http://localhost:3000/api/'
+  apiEndpoint: 'https://yalabenanotlob.herokuapp.com/api/'
 };

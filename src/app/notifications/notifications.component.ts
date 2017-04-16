@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SocketService } from '../services/socket.service';
-import {NotificationsService} from '../services/notifications.service';
 
 @Component({
   selector: 'app-notifications',
@@ -12,7 +11,7 @@ export class NotificationsComponent implements OnInit, OnDestroy {
 
   private notifications: any = [];
   private connection;
-  private notification: any = {to: '58e81de8639dbf5998125e64', link: 'salama.com', message: 'salamadssdsdsdsd', type: 'invitation'};
+  private notification: any = {to: '58e7e54e182f6745403acf23', link: 'salama.com', message: 'salamadssdsdsdsd', type: 'invitation'};
 
   constructor( private socketService: SocketService ) { }
 
