@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
 <div class="row" style="height: 450px">
   <div class="col s12 center-align">
-    <h4>{{order.name}} <a class="btn-floating waves-effect red" (click)="checkout()"><i class="material-icons">check</i></a></h4>
+    <h4>{{order.name}} <a  *ngIf="user._id == order.owner" class="btn-floating waves-effect red" (click)="checkout()"><i class="material-icons">check</i></a></h4>
   </div>
   <div class="col s12">
     <div class="row no-padding no-margin valign-wrapper">
