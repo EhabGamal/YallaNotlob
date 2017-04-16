@@ -3,6 +3,11 @@
     <i class="material-icons circle">group</i>
     <span class="title">{{notification.message}}</span>
   </li>
+  <li class="collection-item notify-with-btns">
+    <span class="title">Testing notification button</span>
+    <a class="notify-btn-top no-padding" (click)="openChekOutModal()"><i class="material-icons no-margin">check</i></a>
+    <a class="notify-btn-bottom no-padding"><i class="material-icons no-margin">close</i></a>
+  </li>
 </ul>
 <nav class="red darken-1" role="navigation">
   <div class="nav-wrapper container">
@@ -37,3 +42,28 @@
     <a href="#" materialize="sideNav" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
   </div>
 </nav>
+<div id="checkoutModal" class="modal" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="checkoutModalActions">
+  <div class="modal-content center">
+    <h4>Order Checkout</h4>
+    <table>
+      <thead>
+      <tr>
+        <th>Item</th>
+        <th>Amount</th>
+        <th>Price</th>
+        <th>Total</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of checkoutData">
+        <td>{{item.name}}</td>
+        <td>{{item.amount}}</td>
+        <td>{{item.price}} EGP</td>
+        <td>{{item.total}} EGP</td>
+      </tr>
+      </tbody>
+    </table>
+    <h5>GRAND TOTAL {{getChekOutGrandTotal()}} EGP</h5>
+  </div>
+  <a class="btn-floating waves-effect btn-rt red" (click)="closeCheckOutModal()"><i class="material-icons">close</i></a>
+</div>

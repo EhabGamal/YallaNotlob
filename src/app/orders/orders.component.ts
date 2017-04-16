@@ -50,7 +50,6 @@ export class OrdersComponent implements OnInit {
         this.friends = data;
         this.loading--;
         console.log(this.friends);
-        //this.friends.push(this.appService.user);
         this.getOrders();
       },
       (error) => {

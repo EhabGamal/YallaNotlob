@@ -71,3 +71,27 @@ html, body{
   border:0;
   border-top:1px solid #e0e0e0;
 }
+.notify-with-btns{
+  padding-right: 40px !important;
+}
+.notify-btn-top{
+  position: absolute !important;
+  right: 8px !important;
+  top: 8px !important;
+  cursor: pointer;
+}
+.notify-btn-top:hover{
+  color: blue !important;
+}
+.notify-btn-bottom{
+  position: absolute !important;
+  right: 8px !important;
+  bottom: 8px !important;
+  cursor: pointer;
+}
+.notify-btn-bottom:hover{
+  color: red !important;
+}
+.notify-with-btns a:hover{
+  background-color: transparent !important;
+}

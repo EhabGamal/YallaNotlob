@@ -1,20 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { AppService } from '../../services/app.service';
 import { LoginService } from '../../services/login.service';
 import {SocketService} from '../../services/socket.service';
 import {NotificationsService} from '../../services/notifications.service';
+import {MaterializeAction} from "angular2-materialize";
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  providers: [ SocketService , NotificationsService]
+  providers: [ NotificationsService]
 })
 export class NavbarComponent implements OnInit {
 
-  user: any;
+  private checkoutModalActions = new EventEmitter<string|MaterializeAction>();
+  private user: any;
   private notifications: any = [];
-  private checkoutData: any;
+  private checkoutData: any = [];
   private checkedOut: boolean;
   constructor(private appService: AppService, private loginService: LoginService, private router: Router, private socketService: SocketService, private notificationService: NotificationsService) { this.user = appService.user; }
 
@@ -49,6 +51,20 @@ export class NavbarComponent implements OnInit {
   logout() {
     this.loginService.logout();
     this.router.navigate(['/login']);
+  }
+
+  openChekOutModal(){
+    this.checkoutModalActions.emit({action:"modal",params:['open']});
+  }
+
+  closeCheckOutModal(){
+    this.checkoutModalActions.emit({action:"modal",params:['close']});
+  }
+
+  getChekOutGrandTotal(){
+    let grandTotal = 0;
+    this.checkoutData.forEach((item) => grandTotal += item.total);
+    return grandTotal;
   }
 
 }
