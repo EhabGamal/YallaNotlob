@@ -19,12 +19,11 @@ export class NotificationsComponent implements OnInit, OnDestroy {
     this.connection = this.socketService.get().subscribe((data) => {
       if (data.type === 'notification') {
         this.notifications.push(data.data);
+        console.log(data.data);
       }
         if (data.type === 'checkout') {
           this.notifications.push(data.data);
         }
-
-      console.log(data);
     },
       (err) => {
         console.log(err);

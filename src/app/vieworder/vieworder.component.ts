@@ -5,7 +5,7 @@ import { ProvidersService } from '../services/providers.service';
 import { OrdersService } from '../services/orders.service';
 import { FriendsService } from '../services/friends.service';
 import { SocketService } from '../services/socket.service';
-import {MaterializeAction} from "angular2-materialize";
+import {MaterializeAction} from 'angular2-materialize';
 
 @Component({
   selector: 'app-vieworder',
@@ -26,15 +26,15 @@ export class VieworderComponent implements OnInit {
   private user: any = {};
 
   private orderID: string = '';
-  private order: any = {id:1,name:'Breakfast Order'};
+  private order: any = {id: 1, name: 'Breakfast Order'};
   private availableItems: any = [];
   private myFriends: any = [];
   private orderItems: any = [];
   private myItems: any = [];
   private newItem: any = {
-    item:'',
-    amount:0,
-    comment:''
+    item: '',
+    amount: 0,
+    comment: ''
   };
   private itemPrice: number = 0;
   private total: number = 0;
@@ -54,7 +54,7 @@ export class VieworderComponent implements OnInit {
   ngOnInit() {
     this.router.params.subscribe(
       (params) => { console.log(params['id']); this.orderID = params['id']; this.getOrder(); this.loading--; }
-    )
+    );
   }
 
   getOrder(){
@@ -72,7 +72,7 @@ export class VieworderComponent implements OnInit {
         console.log(error);
         this.loading--;
       }
-    )
+    );
   }
 
   getAvailableItems(){
@@ -114,8 +114,8 @@ export class VieworderComponent implements OnInit {
 
   addItem(id: string){
     console.log(this.newItem);
-    if(this.newItem.item != ''){
-      if(this.newItem.amount > 0){
+    if (this.newItem.item != ''){
+      if (this.newItem.amount > 0){
         this.loading++;
         this.ordersService.addItem(this.orderID, this.newItem).subscribe(
           (data) => {
@@ -123,50 +123,50 @@ export class VieworderComponent implements OnInit {
             this.getOrder();
             this.resetNewItem();
             this.loading--;
-            this.setModalMsg(data.message,1);
+            this.setModalMsg(data.message, 1);
             this.showModal();
           },
           (error) => {
             console.log(error);
             this.loading--;
-            this.setModalMsg(error.json().message,0);
+            this.setModalMsg(error.json().message, 0);
           }
-        )
+        );
       }else
-        this.setModalMsg('Amount Cannot be ZERO!',2);
+        this.setModalMsg('Amount Cannot be ZERO!', 2);
     }else
-      this.setModalMsg('Select Item to Add',2);
+      this.setModalMsg('Select Item to Add', 2);
   }
 
   removeItem(id: string){
     this.loading++;
-    this.ordersService.removeItem(this.orderID,id).subscribe(
+    this.ordersService.removeItem(this.orderID, id).subscribe(
       (data) => {
         this.getOrder();
         this.loading--;
-        this.setModalMsg(data.message,1);
+        this.setModalMsg(data.message, 1);
         this.showModal();
       },
       (error) => {
         console.log(error);
         this.loading--;
-        this.setModalMsg(error.json().message,0);
+        this.setModalMsg(error.json().message, 0);
       }
-    )
+    );
   }
 
   setItemPrice(){
     this.order.items.map((item) => {
-      this.availableItems.filter((available) => available._id == item.item).map((available) => { item.price = available.price; item.name = available.name;});
-    })
+      this.availableItems.filter((available) => available._id == item.item).map((available) => { item.price = available.price; item.name = available.name; });
+    });
     this.calcTotal();
   };
 
   setOwnerName(){
     console.log(this.myFriends);
     this.order.items.map((item) => {
-      item.ownerName = this.myFriends.filter((friend) => friend._id == item.orderBy).map((friend) => { console.log('friend');console.log(friend); return friend.firstName;});
-    })
+      item.ownerName = this.myFriends.filter((friend) => friend._id == item.orderBy).map((friend) => { console.log('friend'); console.log(friend); return friend.firstName; });
+    });
   }
 
   getCustomerTotal(id: string){
@@ -176,14 +176,14 @@ export class VieworderComponent implements OnInit {
   }
 
   getCustomerName(id: string){
-    return this.myFriends.filter((friend) => friend._id==id).map((friend) => friend.firstName+' '+friend.lastName);
+    return this.myFriends.filter((friend) => friend._id == id).map((friend) => friend.firstName + ' ' + friend.lastName);
   }
 
   resetNewItem(){
     this.newItem = {
-      item:'',
-      amount:0,
-      comment:''
+      item: '',
+      amount: 0,
+      comment: ''
     };
     this.calcItemPrice();
   }
@@ -195,7 +195,7 @@ export class VieworderComponent implements OnInit {
 
   calcTotal(){
     this.total = this.itemPrice;
-    this.order.items.filter((item) => item.orderBy == this.appService.user._id).map((item) => { this.total += item.price * item.amount; })
+    this.order.items.filter((item) => item.orderBy == this.appService.user._id).map((item) => { this.total += item.price * item.amount; });
   }
 
   checkout(){
@@ -204,8 +204,8 @@ export class VieworderComponent implements OnInit {
         console.log(data);
         this.receipt = data;
         this.customers = Object.keys(this.receipt);
-        this.openCheckOutModal();
-        this.socketService.checkout({id:this.orderID});
+        // this.openCheckOutModal();
+        this.socketService.checkout({id: this.orderID});
       },
       (error) => {
         console.log(error);
@@ -215,17 +215,17 @@ export class VieworderComponent implements OnInit {
 
   getChekOutGrandTotal(){
     let grandTotal = 0;
-    for(let customer in this.receipt)
-      this.receipt[customer].forEach((item) => grandTotal += item.total)
+    for (const customer in this.receipt)
+      this.receipt[customer].forEach((item) => grandTotal += item.total);
     return grandTotal;
   }
 
   openCheckOutModal(){
-    this.orderModalActions.emit({action:"modal",params:['open']});
+    this.orderModalActions.emit({action: 'modal', params: ['open']});
   }
 
   closeCheckOutModal(){
-    this.orderModalActions.emit({action:"modal",params:['close']});
+    this.orderModalActions.emit({action: 'modal', params: ['close']});
   }
 
   setModalMsg(msg: string, state: number) {
@@ -245,7 +245,7 @@ export class VieworderComponent implements OnInit {
   }
 
   showModal(){
-    this.modal.modalActions.emit({action:"modal",params:['open']});
+    this.modal.modalActions.emit({action: 'modal', params: ['open']});
   }
 
 }

@@ -11,8 +11,8 @@ export class SocketService {
   private name: string;
   socket: SocketIOClient.Socket;
   constructor(@Inject(APP_CONFIG) private config: AppConfig, private appService: AppService) {
-    const socketUrl = 'http://localhost:3000';
-    this.socket = io.connect(socketUrl);
+    const socketUrl = 'https://yalabenanotlob.herokuapp.com';
+    this.socket = io.connect();
   }
 
   // Get items observable
