@@ -12,7 +12,7 @@ export class SocketService {
   socket: SocketIOClient.Socket;
   constructor(@Inject(APP_CONFIG) private config: AppConfig, private appService: AppService) {
     const socketUrl = 'https://yalabenanotlob.herokuapp.com';
-    this.socket = io.connect();
+    this.socket = io.connect(socketUrl);
   }
 
   // Get items observable
@@ -44,7 +44,7 @@ export class SocketService {
 
   // Handle connection opening
   private connect() {
-    console.log(`Connected to localhost:3000`);
+    console.log(`Connected to https://yalabenanotlob.herokuapp.com`);
 
     // Request initial list when connected
     this.socket.emit('login', this.appService.user);
@@ -52,7 +52,7 @@ export class SocketService {
 
   // Handle connection closing
   private disconnect() {
-    console.log(`Disconnected from "${this.name}"`);
+    console.log(`Disconnected from https://yalabenanotlob.herokuapp.com`);
     this.socket.emit('logout', this.appService.user);
   }
 }
