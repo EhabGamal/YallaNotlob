@@ -80,5 +80,8 @@ export class NavbarComponent implements OnInit {
     this.orderService.refuseInvitation(notification.link).subscribe((data) => console.log(data), (err) => console.log(err));
     this.seeNotification(notification._id, index);
   }
-
+  checkoutNotification(data) {
+    this.checkoutData = data;
+    this.openChekOutModal();
+  }
 }

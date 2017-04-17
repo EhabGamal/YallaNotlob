@@ -2,6 +2,7 @@
   <li *ngFor="let notification of notifications;let i = index;" class="collection-item avatar" (click)="seeNotification(notification._id,i)">
     <i class="material-icons circle">group</i>
     <span class="title">{{notification.message}}</span>
+    <a class="notify-btn-top no-padding" *ngIf="notification.type=='checkout'" (click)="checkoutNotification(notification.details)"><i class="material-icons no-margin">remove_red_eye</i></a>
     <a class="notify-btn-top no-padding" *ngIf="notification.type=='invitation'" (click)="acceptInvitation(notification,i)"><i class="material-icons no-margin">check</i></a>
     <a class="notify-btn-bottom no-padding" *ngIf="notification.type=='invitation'" (click)="refuseInvitation(notification,i)"><i class="material-icons no-margin">close</i></a>
   </li>
